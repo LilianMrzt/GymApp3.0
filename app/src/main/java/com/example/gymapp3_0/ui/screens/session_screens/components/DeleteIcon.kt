@@ -1,4 +1,4 @@
-package com.example.gymapp3_0.ui.screens.components
+package com.example.gymapp3_0.ui.screens.session_screens.components
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton

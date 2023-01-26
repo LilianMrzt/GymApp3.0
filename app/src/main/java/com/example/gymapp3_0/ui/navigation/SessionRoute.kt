@@ -41,10 +41,10 @@ fun NavGraphBuilder.sessionListNavigation(
                     navController.navigate(AddSessionRoutes.CreateSession.name)
                 },
 
-/*
+
                 navigateToViewSession = { sessionId ->
                     navController.navigate("${AddSessionRoutes.SeeSession.name}/${sessionId}")
-                } */
+                }
             )
         }
 

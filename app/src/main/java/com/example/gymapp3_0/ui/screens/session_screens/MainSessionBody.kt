@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.gymapp3_0.ui.screens.components.SessionsContent
+import com.example.gymapp3_0.ui.screens.session_screens.components.SessionsContent
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
@@ -21,7 +21,7 @@ import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 fun SessionsMainBody(
     viewModel: SessionViewModel = hiltViewModel(),
     navigateToCreateSession: () -> Unit,
-    //navigateToViewSession: (sessionID: Int) -> Unit,
+    navigateToViewSession: (sessionID: Int) -> Unit,
 ) {
 
     val sessions by viewModel.sessions.collectAsState(
@@ -39,7 +39,7 @@ fun SessionsMainBody(
                 deleteSession = { session ->
                     viewModel.deleteSession(session)
                 },
-                navigateToUpdateBookScreen = {} //navigateToViewSession
+                navigateToViewSession = navigateToViewSession //navigateToViewSession
             )
 
 /*

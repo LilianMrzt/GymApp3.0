@@ -1,4 +1,4 @@
-package com.example.gymapp3_0.ui.screens.components
+package com.example.gymapp3_0.ui.screens.session_screens.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +19,7 @@ fun SessionsContent(
     padding: PaddingValues,
     sessions: Sessions,
     deleteSession: (session: SessionModel) -> Unit,
-    navigateToUpdateBookScreen: (bookId: Int) -> Unit
+    navigateToViewSession: (bookId: Int) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -35,7 +35,7 @@ fun SessionsContent(
                     deleteSession(session)
                 },
 
-                navigateToUpdateBookScreen = navigateToUpdateBookScreen
+                navigateToViewSession = navigateToViewSession
             )
         }
     }
