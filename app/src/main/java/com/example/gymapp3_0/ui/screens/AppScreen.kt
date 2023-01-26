@@ -16,6 +16,7 @@ import com.example.gymapp3_0.R
 import com.example.gymapp3_0.ui.navigation.sessionListNavigation
 import com.example.gymapp3_0.ui.screens.session_screens.components.BottomBar
 import com.example.gymapp3_0.ui.screens.session_screens.components.TopBar
+import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 sealed class Screen(
@@ -69,7 +70,8 @@ fun AppBody(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     innerPadding: PaddingValues = PaddingValues(Dp(10.0f)),
-    viewModel: SessionViewModel = hiltViewModel()
+    sessionViewModel: SessionViewModel = hiltViewModel(),
+    exerciseViewModel: ExerciseViewModel = hiltViewModel()
 ) {
     NavHost(
         navController = navController,
@@ -78,7 +80,8 @@ fun AppBody(
     ) {
         sessionListNavigation(
             navController = navController,
-            viewModel = viewModel
+            sessionViewModel = sessionViewModel,
+            exerciseViewModel = exerciseViewModel
         )
 
 

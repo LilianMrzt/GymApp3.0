@@ -11,20 +11,22 @@ import androidx.navigation.navigation
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants.Companion.SESSION_ID
 import com.example.gymapp3_0.ui.screens.Screen
-import com.example.gymapp3_0.ui.screens.session_screens.CreateSessionBody
-import com.example.gymapp3_0.ui.screens.session_screens.SessionsMainBody
-import com.example.gymapp3_0.ui.screens.session_screens.ViewSessionBody
+import com.example.gymapp3_0.ui.screens.session_screens.*
+import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 enum class AddSessionRoutes(@StringRes val title: Int) {
     Start(R.string.main_session_screen),
     CreateSession(R.string.create_session),
     SeeSession(R.string.see_session),
+    AddExercise(R.string.add_exercise),
+    CreateExercise(R.string.create_exercise)
 }
 
 fun NavGraphBuilder.sessionListNavigation(
     navController: NavHostController,
-    viewModel: SessionViewModel
+    sessionViewModel: SessionViewModel,
+    exerciseViewModel: ExerciseViewModel
 ) {
     navigation(
         startDestination = AddSessionRoutes.Start.name,
@@ -66,22 +68,47 @@ fun NavGraphBuilder.sessionListNavigation(
             )
         }
 
-
+        //CreateSession
         composable(route = AddSessionRoutes.CreateSession.name) {
             CreateSessionBody(
                 modifier = Modifier,
 
                 addSession = { session ->
-                    viewModel.addSession(session)
+                    sessionViewModel.addSession(session)
                 },
                 navigateToMainSession = {
                     navController.navigate(AddSessionRoutes.Start.name)
                 },
-
-
-                )
+                navigateToAddExercises = {
+                    navController.navigate(AddSessionRoutes.AddExercise.name)
+                }
+            )
         }
 
+        //AddExercise
+        composable(route = AddSessionRoutes.AddExercise.name) {
+            AddExerciseBody(
+                navigateBackToCreateSession = {
+                    navController.navigate(AddSessionRoutes.CreateSession.name)
+                },
+                navigateToCreateExercise = {
+                    navController.navigate(AddSessionRoutes.CreateExercise.name)
+                }
+            )
+        }
 
+        //CreateExercise
+        composable(route = AddSessionRoutes.CreateExercise.name) {
+            CreateExerciseBody(
+                modifier = Modifier,
+
+                addExercise = { exercise ->
+                    exerciseViewModel.addExercise(exercise)
+                },
+                navigateBackToAddExercise = {
+                    navController.navigate(AddSessionRoutes.AddExercise.name)
+                }
+            )
+        }
     }
 }

@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.gymapp3_0.core.Constants.Companion.ROUNDED_CORNER
 import com.example.gymapp3_0.domain.models.SessionModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -19,9 +20,8 @@ fun SessionCard(
     deleteSession: () -> Unit,
     navigateToViewSession: (sessionID: Int) -> Unit
 ) {
-
     ElevatedCard(
-        shape = RoundedCornerShape(15.dp),
+        shape = RoundedCornerShape(ROUNDED_CORNER),
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 5.dp),
@@ -64,8 +64,6 @@ fun SessionCard(
                 TextDescription(
                     sessionDescription = session.description
                 )
-
-
             }
 
             Spacer(
@@ -79,48 +77,4 @@ fun SessionCard(
         }
     }
 }
-
-/*
-@Composable
-@ExperimentalMaterial3Api
-fun SessionCard(
-    session: SessionModel,
-    deleteSession: () -> Unit,
-    navigateToViewSession: (sessionID: Int) -> Unit
-) {
-    ElevatedCard(
-        shape = MaterialTheme.shapes.small,
-        modifier = Modifier
-            .padding(
-                start = 8.dp,
-                end = 8.dp,
-                top = 4.dp,
-                bottom = 4.dp
-            )
-            .fillMaxWidth()
-            .clickable { navigateToViewSession(session.id) },
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Column {
-                TextName(
-                    sessionName = session.name
-                )
-                TextDescription(
-                    sessionDescription = session.description
-                )
-            }
-            Spacer(
-                modifier = Modifier.weight(1f)
-            )
-            DeleteIcon(
-                deleteSession = deleteSession
-            )
-        }
-    }
-}*/
 

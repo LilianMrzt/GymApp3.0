@@ -28,10 +28,7 @@ fun SessionsMainBody(
         initial = emptyList()
     )
 
-
-
     Scaffold(
-
         content = { padding ->
             SessionsContent(
                 padding = padding,
@@ -41,21 +38,6 @@ fun SessionsMainBody(
                 },
                 navigateToViewSession = navigateToViewSession //navigateToViewSession
             )
-
-/*
-            AddBookAlertDialog(
-                openDialog = viewModel.openDialog,
-                closeDialog = {
-                    viewModel.closeDialog()
-                },
-                addBook = { book ->
-                    viewModel.addBook(book)
-                }
-            )
-
- */
-
-
         },
 
 
@@ -67,6 +49,4 @@ fun SessionsMainBody(
             }
         },
     )
-
-
 }

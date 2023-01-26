@@ -16,37 +16,35 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.gymapp3_0.R
-import com.example.gymapp3_0.core.Constants.Companion.NO_VALUE
-import com.example.gymapp3_0.core.Constants.Companion.ROUNDED_CORNER
-import com.example.gymapp3_0.domain.models.SessionModel
-import com.example.gymapp3_0.ui.screens.session_screens.components.AddExerciseCard
+import com.example.gymapp3_0.core.Constants
+import com.example.gymapp3_0.domain.models.ExerciseModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateSessionBody(
+fun CreateExerciseBody(
     modifier: Modifier,
-    addSession: (session: SessionModel) -> Unit,
-    navigateToMainSession: () -> Unit,
-    navigateToAddExercises: () -> Unit
+    addExercise: (exercise: ExerciseModel) -> Unit,
+    navigateBackToAddExercise: () -> Unit,
 ) {
 
-    var name by remember { mutableStateOf(NO_VALUE) }
+    var name by remember { mutableStateOf(Constants.NO_VALUE) }
+    var muscle by remember { mutableStateOf(Constants.NO_VALUE) }
 
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
 
     Scaffold(
         floatingActionButton = {
-            if (name != NO_VALUE) {
+            if (name != Constants.NO_VALUE && muscle != Constants.NO_VALUE) {
                 FloatingActionButton(
-                    onClick = navigateToMainSession,
+                    onClick = navigateBackToAddExercise,
 
                     interactionSource = interactionSource
                 ) {
                     Icon(
                         Icons.Filled.Check,
-                        contentDescription = "Create Session"
+                        contentDescription = "Create Exercise"
                     )
                 }
             }
@@ -70,13 +68,14 @@ fun CreateSessionBody(
                     onValueChange = { name = it },
                     placeholder = {
                         Text(
-                            text = stringResource(R.string.session_name)
+                            //text = Constants.SESSION_NAME
+                            text = stringResource(R.string.exercise_name)
                         )
                     },
                     modifier = Modifier
                         .fillMaxWidth(),
                     singleLine = true,
-                    shape = RoundedCornerShape(ROUNDED_CORNER),
+                    shape = RoundedCornerShape(Constants.ROUNDED_CORNER),
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = MaterialTheme.colorScheme.onPrimary,
                         disabledTextColor = MaterialTheme.colorScheme.secondary,
@@ -90,25 +89,35 @@ fun CreateSessionBody(
             }
 
             item {
-                Divider(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(start = 32.dp, end = 32.dp),
-                    thickness = 1.dp,
-                    color = MaterialTheme.colorScheme.onBackground
+                TextField(
+                    value = muscle,
+                    onValueChange = { muscle = it },
+                    placeholder = {
+                        Text(
+                            text = stringResource(R.string.exercise_muscle)
+                        )
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    singleLine = true,
+                    shape = RoundedCornerShape(Constants.ROUNDED_CORNER),
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = MaterialTheme.colorScheme.onPrimary,
+                        disabledTextColor = MaterialTheme.colorScheme.secondary,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent
+                    )
                 )
+
+                Spacer(modifier = Modifier.height(10.dp))
             }
 
-            item {
-                AddExerciseCard(
-                    navigateToAddExercises = navigateToAddExercises,
-                    label = R.string.add_exercise
-                )
-            }
+
 
             if (isPressed) {
-                val session = SessionModel(0, name)
-                addSession(session)
+                val exercise = ExerciseModel(0, name, muscle)
+                addExercise(exercise)
             }
         }
     }

@@ -16,11 +16,11 @@ interface SessionDao {
     fun getSession(id: Int): SessionModel
 
     @Insert(onConflict = IGNORE)
-    fun addSession(book: SessionModel)
+    fun addSession(session: SessionModel)
 
     @Update
-    fun updateSession(book: SessionModel)
+    fun updateSession(session: SessionModel)
 
     @Delete
-    fun deleteSession(book: SessionModel)
+    fun deleteSession(session: SessionModel)
 }

@@ -1,28 +1,31 @@
 <resources>
-    <string name="app_name">GymApp</string>
-
-    <string name="sessions">Séances</string>
-    <string name="calendar">Calendrier</string>
-    <string name="profile">Profil</string>
-    <string name="timer">Timer</string>
-    <string name="navigation_drawer">Navigation Drawer</string>
-
-    <string name="add_exercise">Ajouter un exercice</string>
-
-
     <string name="exercise1">Développé Couché</string>
     <string name="muscle1">Pectoraux</string>
     <string name="muscle2">Epaules</string>
     <string name="muscle3">Triceps</string>
-    <string name="setSessionName">Nom de la séance</string>
-    <string name="setSessionDescription">Entrer la description de la séance</string>
     <string name="sessionID">sessionID</string>
     <string name="exerciseID">exerciseID</string>
+
+    //App Name
+    <string name="app_name">GymApp</string>
+
 
     //Navigation
     <string name="main_session_screen">Session List</string>
     <string name="create_session">Create a Session</string>
     <string name="see_session">See Session</string>
+    <string name="add_exercise">Add an exercise</string>
 
+    <string name="sessions">Sessions</string>
+    <string name="calendar">Calendar</string>
+    <string name="timer">Timer</string>
+    <string name="create_exercise">Create Exercise</string>
+
+
+    //Placeholders
+    <string name="session_name">Enter the name of the session</string>
+    <string name="session_description">Enter the description of the session</string>
+    <string name="exercise_name">Enter the name of the exercise</string>
+    <string name="exercise_muscle">Enter the main muscle of the exercise</string>
 
 </resources>

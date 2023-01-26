@@ -10,9 +10,9 @@ interface SessionRepository {
 
     fun getSessionFromRoom(id: Int): SessionModel
 
-    fun addSessionToRoom(book: SessionModel)
+    fun addSessionToRoom(session: SessionModel)
 
-    fun updateSessionInRoom(book: SessionModel)
+    fun updateSessionInRoom(session: SessionModel)
 
-    fun deleteSessionFromRoom(book: SessionModel)
+    fun deleteSessionFromRoom(session: SessionModel)
 }
