@@ -1,23 +1,24 @@
 package com.example.gymapp3_0.ui.screens.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.gymapp.domain.models.SessionModel
+import com.example.gymapp3_0.domain.models.SessionModel
 
 @Composable
-@ExperimentalMaterialApi
+@ExperimentalMaterial3Api
 fun SessionCard(
     session: SessionModel,
     deleteSession: () -> Unit,
     navigateToUpdateBookScreen: (bookId: Int) -> Unit
 ) {
-    Card(
+    ElevatedCard(
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
             .padding(
@@ -26,11 +27,8 @@ fun SessionCard(
                 top = 4.dp,
                 bottom = 4.dp
             )
-            .fillMaxWidth(),
-        elevation = 3.dp,
-        onClick = {
-            navigateToUpdateBookScreen(session.id)
-        }
+            .fillMaxWidth()
+            .clickable { navigateToUpdateBookScreen(session.id) },
     ) {
         Row(
             modifier = Modifier

@@ -7,14 +7,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.gymapp3_0.R
+import com.example.gymapp3_0.ui.navigation.sessionListNavigation
 import com.example.gymapp3_0.ui.screens.components.BottomBar
 import com.example.gymapp3_0.ui.screens.components.TopBar
-import com.example.gymapp3_0.ui.screens.session_screens.SessionsMainBody
+import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 sealed class Screen(
     val route: String,
@@ -67,18 +69,20 @@ fun AppBody(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     innerPadding: PaddingValues = PaddingValues(Dp(10.0f)),
+    viewModel: SessionViewModel = hiltViewModel()
 ) {
     NavHost(
         navController = navController,
         startDestination = Screen.Sessions.route,
         modifier = Modifier.padding(innerPadding)
     ) {
-        /*sessionListNavigation(
+        sessionListNavigation(
             navController = navController,
+            viewModel = viewModel
         )
 
-         */
-        composable(Screen.Sessions.route) { SessionsMainBody() }
+
+        //composable(Screen.Sessions.route) { SessionsMainBody() }
         composable(Screen.Calendar.route) { CalendarBody(navController) }
         composable(Screen.Timer.route) { TimerBody(navController) }
     }

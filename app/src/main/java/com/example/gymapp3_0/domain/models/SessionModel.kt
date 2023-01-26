@@ -1,4 +1,4 @@
-package com.example.gymapp.domain.models
+package com.example.gymapp3_0.domain.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

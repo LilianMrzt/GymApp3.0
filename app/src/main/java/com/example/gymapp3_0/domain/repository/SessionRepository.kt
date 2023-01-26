@@ -1,6 +1,6 @@
-package com.example.gymapp.domain.repository
+package com.example.gymapp3_0.domain.repository
 
-import com.example.gymapp.domain.models.SessionModel
+import com.example.gymapp3_0.domain.models.SessionModel
 import kotlinx.coroutines.flow.Flow
 
 typealias Sessions = List<SessionModel>

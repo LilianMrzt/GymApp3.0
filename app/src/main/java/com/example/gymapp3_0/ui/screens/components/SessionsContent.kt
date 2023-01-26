@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.gymapp.domain.models.SessionModel
-import com.example.gymapp.domain.repository.Sessions
+import com.example.gymapp3_0.domain.models.SessionModel
+import com.example.gymapp3_0.domain.repository.Sessions
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @ExperimentalMaterialApi
 fun SessionsContent(

@@ -1,26 +1,26 @@
-package com.example.gymapp.data.database
+package com.example.gymapp3_0.data.database
 
 import androidx.room.*
 import androidx.room.OnConflictStrategy.Companion.IGNORE
-import com.example.gymapp.domain.models.SessionModel
-import com.example.gymapp.domain.repository.Sessions
 import com.example.gymapp3_0.core.Constants.Companion.SESSION_TABLE
+import com.example.gymapp3_0.domain.models.SessionModel
+import com.example.gymapp3_0.domain.repository.Sessions
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SessionDao {
     @Query("SELECT * FROM $SESSION_TABLE ORDER BY id ASC")
-    fun getBooks(): Flow<Sessions>
+    fun getSessions(): Flow<Sessions>
 
     @Query("SELECT * FROM $SESSION_TABLE WHERE id = :id")
-    fun getBook(id: Int): SessionModel
+    fun getSession(id: Int): SessionModel
 
     @Insert(onConflict = IGNORE)
-    fun addBook(book: SessionModel)
+    fun addSession(book: SessionModel)
 
     @Update
-    fun updateBook(book: SessionModel)
+    fun updateSession(book: SessionModel)
 
     @Delete
-    fun deleteBook(book: SessionModel)
+    fun deleteSession(book: SessionModel)
 }

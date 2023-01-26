@@ -5,15 +5,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.gymapp.domain.models.SessionModel
-import com.example.gymapp.domain.repository.SessionRepository
+import com.example.gymapp3_0.domain.models.SessionModel
+import com.example.gymapp3_0.domain.repository.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SessionViewModel @Inject constructor(private val repo: SessionRepository) : ViewModel() {
+class SessionViewModel @Inject constructor(
+    private val repo: SessionRepository
+) : ViewModel() {
 
     var session by mutableStateOf(SessionModel(0, "", ""))
     var openDialog by mutableStateOf(false)
