@@ -20,7 +20,7 @@ class ExerciseViewModel @Inject constructor(
     var exercise by mutableStateOf(ExerciseModel(0, "", ""))
     var openDialog by mutableStateOf(false)
     var exercises = repo.getExercisesFromRoom()
-
+    //var isSelected by mutableStateOf(false)
 
     fun getExercise(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         exercise = repo.getExerciseFromRoom(id)
@@ -33,7 +33,6 @@ class ExerciseViewModel @Inject constructor(
     fun updateMuscle(muscle: String) {
         exercise = exercise.copy(muscle = muscle)
     }
-
 
     fun addExercise(exercise: ExerciseModel) {
         viewModelScope.launch(Dispatchers.IO) {

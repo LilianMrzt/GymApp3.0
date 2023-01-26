@@ -42,7 +42,7 @@ fun AddExerciseCard(navigateToAddExercises: () -> Unit, label: Int) {
             Card(
                 shape = CircleShape,
                 modifier = Modifier
-                    .size(40.dp),
+                    .size(30.dp),
             ) {
                 Row(
                     modifier = Modifier

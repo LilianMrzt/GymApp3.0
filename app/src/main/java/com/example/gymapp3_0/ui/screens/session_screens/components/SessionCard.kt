@@ -66,9 +66,6 @@ fun SessionCard(
                 )
             }
 
-            Spacer(
-                modifier = Modifier.weight(1f)
-            )
 
             DeleteIcon(
                 deleteSession = deleteSession

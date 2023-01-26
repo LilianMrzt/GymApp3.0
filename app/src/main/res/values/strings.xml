@@ -26,6 +26,7 @@
     <string name="session_name">Enter the name of the session</string>
     <string name="session_description">Enter the description of the session</string>
     <string name="exercise_name">Enter the name of the exercise</string>
-    <string name="exercise_muscle">Enter the main muscle of the exercise</string>
+    <string name="exercise_muscle">Select the main muscle of the exercise</string>
+    <string name="no_session_created">Start by creating a session</string>
 
 </resources>

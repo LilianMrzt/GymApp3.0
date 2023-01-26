@@ -11,5 +11,6 @@ data class ExerciseModel(
     val id: Int,
     var name: String = "",
     var muscle: String = "",
+    //var isSelected: Boolean = false
 )
 
