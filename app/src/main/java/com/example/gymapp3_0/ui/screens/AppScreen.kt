@@ -14,8 +14,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.ui.navigation.sessionListNavigation
-import com.example.gymapp3_0.ui.screens.session_screens.components.BottomBar
-import com.example.gymapp3_0.ui.screens.session_screens.components.TopBar
+import com.example.gymapp3_0.ui.screens.components.BottomBar
+import com.example.gymapp3_0.ui.screens.components.TopBar
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 

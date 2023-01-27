@@ -7,7 +7,7 @@
     <string name="exerciseID">exerciseID</string>
 
     //App Name
-    <string name="app_name">GymApp</string>
+    <string name="app_name">GymApp3.0</string>
 
 
     //Navigation
@@ -28,5 +28,9 @@
     <string name="exercise_name">Enter the name of the exercise</string>
     <string name="exercise_muscle">Select the main muscle of the exercise</string>
     <string name="no_session_created">Start by creating a session</string>
+    <string name="delete_exercise_confirmation">Are you sure you want to delete this exercise ?</string>
+    <string name="cancel">Cancel</string>
+    <string name="warning">Warning</string>
+    <string name="delete">Delete</string>
 
 </resources>

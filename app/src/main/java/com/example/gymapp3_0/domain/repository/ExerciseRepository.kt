@@ -15,4 +15,5 @@ interface ExerciseRepository {
     fun updateExerciseInRoom(exercise: ExerciseModel)
 
     fun deleteExerciseFromRoom(exercise: ExerciseModel)
+    
 }

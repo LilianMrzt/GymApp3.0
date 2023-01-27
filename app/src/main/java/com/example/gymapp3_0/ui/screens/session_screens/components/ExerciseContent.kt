@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.gymapp3_0.R
-import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.domain.repository.Exercises
 
 @Composable
@@ -19,7 +18,6 @@ import com.example.gymapp3_0.domain.repository.Exercises
 fun ExerciseContent(
     padding: PaddingValues,
     exercises: Exercises,
-    deleteExercise: (session: ExerciseModel) -> Unit,
     navigateToCreateExercise: () -> Unit,
 ) {
     LazyColumn(
@@ -29,6 +27,7 @@ fun ExerciseContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
+
             AddExerciseCard(
                 navigateToAddExercises = navigateToCreateExercise,
                 label = R.string.create_exercise
@@ -47,12 +46,8 @@ fun ExerciseContent(
         items(
             items = exercises
         ) { exercise ->
-
             ExerciseCard(
                 exercise = exercise,
-                deleteExercise = {
-                    deleteExercise(exercise)
-                },
             )
         }
     }

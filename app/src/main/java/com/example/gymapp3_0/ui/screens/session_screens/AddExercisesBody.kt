@@ -25,18 +25,11 @@ fun AddExerciseBody(
 
     Scaffold(
         content = { padding ->
-
-
             ExerciseContent(
                 padding = padding,
                 exercises = exercises,
-                deleteExercise = { exercise ->
-                    viewModel.deleteExercise(exercise)
-                },
                 navigateToCreateExercise = navigateToCreateExercise
             )
-            
-
         },
         floatingActionButton = {
             FloatingActionButton(
