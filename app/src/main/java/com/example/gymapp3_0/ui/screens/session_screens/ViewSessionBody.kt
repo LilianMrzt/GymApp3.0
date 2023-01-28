@@ -4,7 +4,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.gymapp3_0.ui.screens.session_screens.components.ViewSessionContent
+import com.example.gymapp3_0.ui.screens.components.ViewSessionContent
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 @Composable

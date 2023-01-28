@@ -19,7 +19,7 @@ import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants.Companion.NO_VALUE
 import com.example.gymapp3_0.core.Constants.Companion.ROUNDED_CORNER
 import com.example.gymapp3_0.domain.models.SessionModel
-import com.example.gymapp3_0.ui.screens.session_screens.components.AddExerciseCard
+import com.example.gymapp3_0.ui.screens.components.AddExerciseCard
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)

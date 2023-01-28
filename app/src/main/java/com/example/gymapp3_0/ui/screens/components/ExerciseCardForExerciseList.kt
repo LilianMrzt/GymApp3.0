@@ -1,14 +1,12 @@
-package com.example.gymapp3_0.ui.screens.session_screens.components
+package com.example.gymapp3_0.ui.screens.components
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -23,46 +21,30 @@ import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 
 @SuppressLint("UnrememberedMutableState")
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun ExerciseCard(
+fun ExerciseCardForExerciseList(
     exercise: ExerciseModel,
     ExerciseViewModel: ExerciseViewModel = hiltViewModel(),
 ) {
+    val canBeSelected: Boolean = false
+
     val isSelected = remember { mutableStateOf(exercise.isSelected) }
-    var showButton by remember { mutableStateOf(true) }
     var popupControl by remember { mutableStateOf(false) }
     var deleteClicked by remember { mutableStateOf(false) }
-    //val deleteClicked: Boolean by ExerciseViewModel.showDialog.collectAsState()
+    var exo2 = ExerciseModel(0, "", "", false)
 
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    var exo2 = ExerciseModel(0, "", "", false)
+
     ElevatedCard(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, top = 5.dp, bottom = 5.dp)
-            .combinedClickable(
-                onClick = {
-                    if (!popupControl) {
-                        val exo = exercise.copy() // This way works
-                        isSelected.value = !isSelected.value
-                        exo.isSelected = isSelected.value
-                        //exercise.isSelected = isSelected.value
-                        ExerciseViewModel.updateExercise(exo)
-                    } else {
-                        popupControl = false
-                    }
-                },
-                onLongClick = {
-                    val exo = exercise.copy() // This way works
-                    isSelected.value = false
-                    exo.isSelected = isSelected.value
-                    ExerciseViewModel.updateExercise(exo)
-                    popupControl = !popupControl
-                }
-            ),
+            .padding(start = 16.dp, end = 16.dp, top = 5.dp, bottom = 5.dp),
+        onClick = {
+            popupControl = !popupControl
+        }
     ) {
         Row(
             modifier = Modifier.padding(
@@ -90,16 +72,8 @@ fun ExerciseCard(
                 )
             }
 
-
             Spacer(modifier = Modifier.weight(1f))
 
-            if (exercise.isSelected) {
-                Icon(
-                    imageVector = Icons.Default.Check,
-                    contentDescription = "selected"
-                )
-            }
-            //val openDialog = remember { mutableStateOf(false) }
             if (popupControl) {
                 IconButton(
                     onClick = {

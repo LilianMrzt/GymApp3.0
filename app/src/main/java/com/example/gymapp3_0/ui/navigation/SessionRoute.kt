@@ -100,8 +100,6 @@ fun NavGraphBuilder.sessionListNavigation(
         //CreateExercise
         composable(route = AddSessionRoutes.CreateExercise.name) {
             CreateExerciseBody(
-                modifier = Modifier,
-
                 addExercise = { exercise ->
                     exerciseViewModel.addExercise(exercise)
                 },

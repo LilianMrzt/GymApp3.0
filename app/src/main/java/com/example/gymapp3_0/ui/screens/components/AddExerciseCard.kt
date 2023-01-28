@@ -1,4 +1,4 @@
-package com.example.gymapp3_0.ui.screens.session_screens.components
+package com.example.gymapp3_0.ui.screens.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape

@@ -10,9 +10,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.gymapp3_0.R
+import com.example.gymapp3_0.ui.navigation.exerciseListNavigation
 import com.example.gymapp3_0.ui.navigation.sessionListNavigation
 import com.example.gymapp3_0.ui.screens.components.BottomBar
 import com.example.gymapp3_0.ui.screens.components.TopBar
@@ -24,14 +24,12 @@ sealed class Screen(
     @StringRes val resourceId: Int, val icon: Int
 ) {
     object Sessions : Screen("Sessions", R.string.sessions, R.drawable.dumbbell_black)
-    object Calendar : Screen("Calendar", R.string.calendar, R.drawable.calendar_black)
-    object Timer : Screen("Timer", R.string.timer, R.drawable.stopwatch_black)
+    object Exercises : Screen("Exercise", R.string.exercises, R.drawable.calendar_black)
 }
 
 val MainScreens = listOf(
     Screen.Sessions,
-    Screen.Timer,
-    Screen.Calendar,
+    Screen.Exercises,
 )
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -83,10 +81,9 @@ fun AppBody(
             sessionViewModel = sessionViewModel,
             exerciseViewModel = exerciseViewModel
         )
-
-
-        //composable(Screen.Sessions.route) { SessionsMainBody() }
-        composable(Screen.Calendar.route) { CalendarBody(navController) }
-        composable(Screen.Timer.route) { TimerBody(navController) }
+        exerciseListNavigation(
+            navController = navController,
+            exerciseViewModel = exerciseViewModel
+        )
     }
 }

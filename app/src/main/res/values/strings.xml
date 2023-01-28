@@ -32,5 +32,8 @@
     <string name="cancel">Cancel</string>
     <string name="warning">Warning</string>
     <string name="delete">Delete</string>
+    <string name="main_exercise_screen">main_exercise_screen</string>
+    <string name="exercises">Exercises</string>
+    <string name="no_exercise_created">Start by creating an exercise</string>
 
 </resources>
