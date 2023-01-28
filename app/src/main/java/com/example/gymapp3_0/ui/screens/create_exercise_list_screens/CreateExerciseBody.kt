@@ -39,7 +39,6 @@ val MuscleList = listOf(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateExerciseBody(
-    modifier: Modifier,
     addExercise: (exercise: ExerciseModel) -> Unit,
     navigateBackToAddExercise: () -> Unit,
 ) {

@@ -1,4 +1,4 @@
-package com.example.gymapp3_0.ui.screens.session_screens.components
+package com.example.gymapp3_0.ui.screens.create_exercise_list_screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,45 +10,38 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.gymapp3_0.R
-import com.example.gymapp3_0.domain.models.SessionModel
-import com.example.gymapp3_0.domain.repository.Sessions
+import com.example.gymapp3_0.domain.repository.Exercises
+import com.example.gymapp3_0.ui.screens.components.ExerciseCardForExerciseList
 
 @Composable
 @ExperimentalMaterialApi
-fun SessionsContent(
+fun ExerciseListContent(
     padding: PaddingValues,
-    sessions: Sessions,
-    deleteSession: (session: SessionModel) -> Unit,
-    navigateToViewSession: (bookId: Int) -> Unit
+    exercises: Exercises,
 ) {
-    if (sessions.isEmpty()) {
+    if (exercises.isEmpty()) {
         Column(
             Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = stringResource(R.string.no_session_created))
+            Text(text = stringResource(R.string.no_exercise_created))
         }
     } else {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
+                .padding(padding),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(
-                items = sessions
-            ) { session ->
-                SessionCard(
-                    session = session,
-                    deleteSession = {
-                        deleteSession(session)
-                    },
-
-                    navigateToViewSession = navigateToViewSession
+                items = exercises
+            ) { exercise ->
+                ExerciseCardForExerciseList(
+                    exercise = exercise,
                 )
             }
         }
     }
-
 
 }

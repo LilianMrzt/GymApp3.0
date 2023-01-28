@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.gymapp3_0.ui.screens.session_screens.components.SessionsContent
+import com.example.gymapp3_0.ui.screens.components.SessionsContent
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
