@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.ui.screens.components.ExerciseContent
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 
@@ -17,6 +18,7 @@ fun AddExerciseBody(
     viewModel: ExerciseViewModel = hiltViewModel(),
     navigateBackToCreateSession: () -> Unit,
     navigateToCreateExercise: () -> Unit,
+    temporaryList: MutableList<ExerciseModel>
 ) {
 
     val exercises by viewModel.exercises.collectAsState(
@@ -28,6 +30,7 @@ fun AddExerciseBody(
             ExerciseContent(
                 padding = padding,
                 exercises = exercises,
+                temporaryList = temporaryList
             )
         },
         floatingActionButton = {

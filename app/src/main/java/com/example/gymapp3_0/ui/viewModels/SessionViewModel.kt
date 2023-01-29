@@ -5,10 +5,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gymapp3_0.data.states.SessionUiState
+import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.domain.models.SessionModel
 import com.example.gymapp3_0.domain.repository.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,17 +20,23 @@ class SessionViewModel @Inject constructor(
     private val repo: SessionRepository
 ) : ViewModel() {
 
-    var session by mutableStateOf(SessionModel(0, "", ""))
+    var session by mutableStateOf(SessionModel(0, "", "", arrayListOf<ExerciseModel>()))
     var openDialog by mutableStateOf(false)
     var sessions = repo.getSessionsFromRoom()
 
+    private val _uiState = MutableStateFlow(SessionUiState())
+
+    //val uiState: StateFlow<SessionUiState> = _uiState.asStateFlow()
+    var uiState by mutableStateOf(
+        SessionUiState()
+    )
 
     fun getSession(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         session = repo.getSessionFromRoom(id)
     }
 
-    fun updateName(name: String) {
-        session = session.copy(name = name)
+    fun addExerciseToSession(exercise: ExerciseModel) {
+        session = session.copy()
     }
 
     fun updateDescription(description: String) {

@@ -9,7 +9,7 @@ import com.example.gymapp3_0.core.Constants
 @Entity(tableName = Constants.EXERCISE_TABLE)
 data class ExerciseModel(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    var id: Int,
     var name: String = "",
     var muscle: String = "",
 

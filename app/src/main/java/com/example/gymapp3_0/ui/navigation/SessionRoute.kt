@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants.Companion.SESSION_ID
+import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.ui.screens.Screen
 import com.example.gymapp3_0.ui.screens.session_screens.*
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
@@ -50,7 +51,8 @@ fun NavGraphBuilder.sessionListNavigation(
 
                 navigateToViewSession = { sessionId ->
                     navController.navigate("${AddSessionRoutes.SeeSession.name}/${sessionId}")
-                }
+                },
+                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>
             )
         }
 
@@ -90,7 +92,8 @@ fun NavGraphBuilder.sessionListNavigation(
                     navController.navigate(AddSessionRoutes.AddExercise.name)
                 },
                 onIsNavigationBarUpChange = onIsNavigationBarUpChange,
-                onCanNavigateBackChange = onCanNavigateBackChange
+                onCanNavigateBackChange = onCanNavigateBackChange,
+                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>
             )
         }
 
@@ -104,7 +107,8 @@ fun NavGraphBuilder.sessionListNavigation(
                 },
                 navigateToCreateExercise = {
                     navController.navigate(AddSessionRoutes.CreateExercise.name)
-                }
+                },
+                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>
             )
         }
 

@@ -1,39 +1,42 @@
 package com.example.gymapp3_0.ui.screens.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.example.gymapp3_0.domain.models.SessionModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 @Composable
 fun ViewSessionContent(
-    padding: PaddingValues,
-    session: SessionModel,
-    navigateBack: () -> Unit
+    selectedSessionID: Int,
+    navigateBack: () -> Unit,
+    sessionViewModel: SessionViewModel = hiltViewModel()
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(padding),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    LaunchedEffect(Unit) {
+        sessionViewModel.getSession(selectedSessionID)
+    }
+    LazyColumn(
+        state = rememberLazyListState(),
+        modifier = Modifier.fillMaxSize()
     ) {
-        Text(text = session.name)
+        items(
+            items = sessionViewModel.session.exerciseList
+        ) { item ->
+            //item.id = sessionList[selectedSessionID].exercises.indexOf(item)
+            item.name
+        }
 
-        Spacer(
-            modifier = Modifier.height(8.dp)
-        )
-
-        Text(text = session.description)
-
-        Button(
-            onClick = {
-                navigateBack()
-            }
-        ) {}
+        item {
+            Button(
+                onClick = {
+                    navigateBack()
+                }
+            ) {}
+        }
     }
 }
