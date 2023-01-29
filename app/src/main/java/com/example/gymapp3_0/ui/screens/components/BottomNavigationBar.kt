@@ -22,14 +22,15 @@ import com.example.gymapp3_0.ui.screens.Screen
 @Composable
 fun BottomBar(
     navController: NavController,
-    onNavigate: (Screen) -> Unit
+    onNavigate: (Screen) -> Unit,
 ) {
-
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+    
     BottomNavigation(
         backgroundColor = MaterialTheme.colorScheme.surface
     ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
+
         MainScreens.forEach { screen ->
             BottomNavigationItem(
                 selectedContentColor = MaterialTheme.colorScheme.primary,

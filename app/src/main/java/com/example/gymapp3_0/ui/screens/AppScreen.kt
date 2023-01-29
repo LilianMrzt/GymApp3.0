@@ -24,7 +24,9 @@ sealed class Screen(
     @StringRes val resourceId: Int, val icon: Int
 ) {
     object Sessions : Screen("Sessions", R.string.sessions, R.drawable.dumbbell_black)
-    object Exercises : Screen("Exercise", R.string.exercises, R.drawable.calendar_black)
+    object Exercises : Screen("Exercise", R.string.exercises, R.drawable.create_exercise)
+    object CreateExercise :
+        Screen("CreateExercise", R.string.create_exercise, R.drawable.create_exercise)
 }
 
 val MainScreens = listOf(
@@ -42,14 +44,26 @@ fun AppScreen() {
         mutableStateOf(Screen.Sessions.resourceId)
     }
 
+    var canNavigateBack by remember {
+        mutableStateOf(false)
+    }
+
+    var isBottomBarUp by remember {
+        mutableStateOf(true)
+    }
+
     Scaffold(
         topBar = {
-            TopBar(title = currentScreenTitle)
+            TopBar(title = currentScreenTitle, canNavigateBack = canNavigateBack) {
+                navController.navigateUp()
+            }
         },
 
         bottomBar = {
-            BottomBar(navController) {
-                currentScreenTitle = it.resourceId
+            if (isBottomBarUp) {
+                BottomBar(navController) {
+                    currentScreenTitle = it.resourceId
+                }
             }
         },
         containerColor = MaterialTheme.colorScheme.background
@@ -58,7 +72,13 @@ fun AppScreen() {
         AppBody(
             navController = navController,
             modifier = Modifier,
-            innerPadding = innerPadding
+            innerPadding = innerPadding,
+            onCanNavigateBackChange = {
+                canNavigateBack = it
+            },
+            onIsNavigationBarUpChange = {
+                isBottomBarUp = it
+            }
         )
     }
 }
@@ -69,7 +89,9 @@ fun AppBody(
     navController: NavHostController,
     innerPadding: PaddingValues = PaddingValues(Dp(10.0f)),
     sessionViewModel: SessionViewModel = hiltViewModel(),
-    exerciseViewModel: ExerciseViewModel = hiltViewModel()
+    exerciseViewModel: ExerciseViewModel = hiltViewModel(),
+    onCanNavigateBackChange: (Boolean) -> Unit,
+    onIsNavigationBarUpChange: (Boolean) -> Unit
 ) {
     NavHost(
         navController = navController,
@@ -79,11 +101,15 @@ fun AppBody(
         sessionListNavigation(
             navController = navController,
             sessionViewModel = sessionViewModel,
-            exerciseViewModel = exerciseViewModel
+            exerciseViewModel = exerciseViewModel,
+            onCanNavigateBackChange = onCanNavigateBackChange,
+            onIsNavigationBarUpChange = onIsNavigationBarUpChange
         )
         exerciseListNavigation(
             navController = navController,
-            exerciseViewModel = exerciseViewModel
+            exerciseViewModel = exerciseViewModel,
+            onCanNavigateBackChange = onCanNavigateBackChange,
+            onIsNavigationBarUpChange = onIsNavigationBarUpChange
         )
     }
 }
