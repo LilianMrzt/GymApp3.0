@@ -13,16 +13,22 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
+import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun ExercisesMainBody(
-    viewModel: ExerciseViewModel = hiltViewModel(),
+    exerciseViewModel: ExerciseViewModel = hiltViewModel(),
+    sessionViewModel: SessionViewModel = hiltViewModel(),
     navigateToCreateExercise: () -> Unit,
 ) {
 
-    val exercises by viewModel.exercises.collectAsState(
+    val sessions by sessionViewModel.sessions.collectAsState(
+        initial = emptyList()
+    )
+
+    val exercises by exerciseViewModel.exercises.collectAsState(
         initial = emptyList()
     )
 
@@ -31,6 +37,7 @@ fun ExercisesMainBody(
             ExerciseListContent(
                 padding = padding,
                 exercises = exercises,
+                sessions = sessions
             )
         },
 

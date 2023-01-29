@@ -1,7 +1,6 @@
 package com.example.gymapp3_0.ui.screens.components
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
@@ -18,18 +17,19 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants
 import com.example.gymapp3_0.domain.models.ExerciseModel
+import com.example.gymapp3_0.domain.repository.Sessions
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
+import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 @SuppressLint("UnrememberedMutableState")
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExerciseCardForExerciseList(
     exercise: ExerciseModel,
     ExerciseViewModel: ExerciseViewModel = hiltViewModel(),
+    SessionViewModel: SessionViewModel = hiltViewModel(),
+    sessions: Sessions
 ) {
-    val canBeSelected: Boolean = false
-
-    val isSelected = remember { mutableStateOf(exercise.isSelected) }
     var popupControl by remember { mutableStateOf(false) }
     var deleteClicked by remember { mutableStateOf(false) }
     var exo2 = ExerciseModel(0, "", "", false)
@@ -114,6 +114,9 @@ fun ExerciseCardForExerciseList(
                             Text(stringResource(R.string.delete))
                             if (isPressed) {
                                 ExerciseViewModel.deleteExercise(exo2)
+                                sessions.forEach { item ->
+                                    SessionViewModel.updateSession(item)
+                                }
                             }
                         }
                     },

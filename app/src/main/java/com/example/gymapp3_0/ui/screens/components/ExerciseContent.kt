@@ -9,6 +9,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.domain.repository.Exercises
 
 @Composable
@@ -16,6 +17,7 @@ import com.example.gymapp3_0.domain.repository.Exercises
 fun ExerciseContent(
     padding: PaddingValues,
     exercises: Exercises,
+    temporaryList: MutableList<ExerciseModel>
 ) {
     LazyColumn(
         modifier = Modifier
@@ -25,10 +27,18 @@ fun ExerciseContent(
     ) {
         items(
             items = exercises
-        ) { exercise ->
+        ) { item ->
+            val copyExercise = item.copy()
+
             ExerciseCard(
-                exercise = exercise,
+                exercise = item,
             )
+
+            if (!temporaryList.contains(copyExercise) && copyExercise.isSelected) {
+                temporaryList.add(copyExercise)
+            } else if (temporaryList.contains(copyExercise) && !copyExercise.isSelected) {
+                temporaryList.remove(copyExercise)
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
@@ -18,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants.Companion.NO_VALUE
 import com.example.gymapp3_0.core.Constants.Companion.ROUNDED_CORNER
+import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.domain.models.SessionModel
 import com.example.gymapp3_0.ui.screens.components.AddExerciseCard
 
@@ -30,11 +32,12 @@ fun CreateSessionBody(
     navigateToMainSession: () -> Unit,
     navigateToAddExercises: () -> Unit,
     onCanNavigateBackChange: (Boolean) -> Unit,
-    onIsNavigationBarUpChange: (Boolean) -> Unit
+    onIsNavigationBarUpChange: (Boolean) -> Unit,
+    temporaryList: MutableList<ExerciseModel>
 ) {
     onCanNavigateBackChange(true)
     onIsNavigationBarUpChange(false)
-    
+
     var name by remember { mutableStateOf(NO_VALUE) }
 
     val interactionSource = remember { MutableInteractionSource() }
@@ -110,8 +113,20 @@ fun CreateSessionBody(
                 )
             }
 
+            items(
+                items = temporaryList
+            ) { item ->
+                Text(text = item.name)
+            }
+
             if (isPressed) {
-                val session = SessionModel(0, name)
+                val copyList = temporaryList.map { it }.toMutableList()
+
+                temporaryList.forEach() {
+                    it.isSelected = false
+                }
+
+                val session = SessionModel(0, name, exerciseList = copyList)
                 addSession(session)
             }
         }

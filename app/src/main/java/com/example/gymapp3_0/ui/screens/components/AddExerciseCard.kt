@@ -17,7 +17,10 @@ import com.example.gymapp3_0.core.Constants.Companion.ROUNDED_CORNER
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddExerciseCard(navigateToAddExercises: () -> Unit, label: Int) {
+fun AddExerciseCard(
+    navigateToAddExercises: () -> Unit,
+    label: Int
+) {
     ElevatedCard(
         shape = RoundedCornerShape(ROUNDED_CORNER),
         modifier = Modifier

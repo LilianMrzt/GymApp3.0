@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.domain.repository.Exercises
+import com.example.gymapp3_0.domain.repository.Sessions
 import com.example.gymapp3_0.ui.screens.components.ExerciseCardForExerciseList
 
 @Composable
@@ -18,6 +19,7 @@ import com.example.gymapp3_0.ui.screens.components.ExerciseCardForExerciseList
 fun ExerciseListContent(
     padding: PaddingValues,
     exercises: Exercises,
+    sessions: Sessions
 ) {
     if (exercises.isEmpty()) {
         Column(
@@ -39,6 +41,7 @@ fun ExerciseListContent(
             ) { exercise ->
                 ExerciseCardForExerciseList(
                     exercise = exercise,
+                    sessions = sessions
                 )
             }
         }
