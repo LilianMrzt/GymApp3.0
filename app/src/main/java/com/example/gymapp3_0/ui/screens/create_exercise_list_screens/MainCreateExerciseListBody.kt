@@ -1,6 +1,7 @@
 package com.example.gymapp3_0.ui.screens.create_exercise_list_screens
 
 import android.annotation.SuppressLint
+import androidx.annotation.StringRes
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -12,6 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.example.gymapp3_0.ui.screens.components.ExerciseListContent
+import com.example.gymapp3_0.ui.screens.components.TopBar
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
@@ -22,6 +26,8 @@ fun ExercisesMainBody(
     exerciseViewModel: ExerciseViewModel = hiltViewModel(),
     sessionViewModel: SessionViewModel = hiltViewModel(),
     navigateToCreateExercise: () -> Unit,
+    @StringRes screenTitle: Int,
+    navController: NavController
 ) {
 
     val sessions by sessionViewModel.sessions.collectAsState(
@@ -33,6 +39,9 @@ fun ExercisesMainBody(
     )
 
     Scaffold(
+        topBar = {
+            TopBar(title = screenTitle, canNavigateBack = false) { }
+        },
         content = { padding ->
             ExerciseListContent(
                 padding = padding,

@@ -15,7 +15,6 @@ import com.example.gymapp3_0.R
 import com.example.gymapp3_0.ui.navigation.exerciseListNavigation
 import com.example.gymapp3_0.ui.navigation.sessionListNavigation
 import com.example.gymapp3_0.ui.screens.components.BottomBar
-import com.example.gymapp3_0.ui.screens.components.TopBar
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
@@ -53,11 +52,14 @@ fun AppScreen() {
     }
 
     Scaffold(
+        /*
         topBar = {
             TopBar(title = currentScreenTitle, canNavigateBack = canNavigateBack) {
                 navController.navigateUp()
             }
         },
+
+         */
 
         bottomBar = {
             if (isBottomBarUp) {
@@ -78,7 +80,9 @@ fun AppScreen() {
             },
             onIsNavigationBarUpChange = {
                 isBottomBarUp = it
-            }
+            },
+            screenTitle = currentScreenTitle,
+            canNavigateBack = canNavigateBack
         )
     }
 }
@@ -91,7 +95,9 @@ fun AppBody(
     sessionViewModel: SessionViewModel = hiltViewModel(),
     exerciseViewModel: ExerciseViewModel = hiltViewModel(),
     onCanNavigateBackChange: (Boolean) -> Unit,
-    onIsNavigationBarUpChange: (Boolean) -> Unit
+    onIsNavigationBarUpChange: (Boolean) -> Unit,
+    @StringRes screenTitle: Int,
+    canNavigateBack: Boolean,
 ) {
     NavHost(
         navController = navController,
@@ -103,13 +109,14 @@ fun AppBody(
             sessionViewModel = sessionViewModel,
             exerciseViewModel = exerciseViewModel,
             onCanNavigateBackChange = onCanNavigateBackChange,
-            onIsNavigationBarUpChange = onIsNavigationBarUpChange
+            onIsNavigationBarUpChange = onIsNavigationBarUpChange,
+            screenTitle = screenTitle,
         )
         exerciseListNavigation(
             navController = navController,
             exerciseViewModel = exerciseViewModel,
-            onCanNavigateBackChange = onCanNavigateBackChange,
-            onIsNavigationBarUpChange = onIsNavigationBarUpChange
+            screenTitle = screenTitle,
+            onIsNavigationBarUpChange = onIsNavigationBarUpChange,
         )
     }
 }

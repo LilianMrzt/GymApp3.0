@@ -1,6 +1,7 @@
 package com.example.gymapp3_0.ui.screens.session_screens
 
 import android.annotation.SuppressLint
+import androidx.annotation.StringRes
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.material.ExperimentalMaterialApi
@@ -17,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.ui.screens.components.SessionsContent
+import com.example.gymapp3_0.ui.screens.components.TopBar
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
@@ -29,6 +31,7 @@ fun SessionsMainBody(
     navigateToCreateSession: () -> Unit,
     navigateToViewSession: (sessionID: Int) -> Unit,
     temporaryList: MutableList<ExerciseModel>,
+    @StringRes screenTitle: Int,
 ) {
 
     val sessions by sessionViewModel.sessions.collectAsState(
@@ -43,6 +46,9 @@ fun SessionsMainBody(
     val isPressed by interactionSource.collectIsPressedAsState()
 
     Scaffold(
+        topBar = {
+            TopBar(title = screenTitle, canNavigateBack = false) { }
+        },
         content = { padding ->
             SessionsContent(
                 padding = padding,
