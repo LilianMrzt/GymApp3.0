@@ -1,4 +1,4 @@
-package com.example.gymapp3_0.ui.screens.create_exercise_list_screens
+package com.example.gymapp3_0.ui.screens.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,7 +12,6 @@ import androidx.compose.ui.res.stringResource
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.domain.repository.Exercises
 import com.example.gymapp3_0.domain.repository.Sessions
-import com.example.gymapp3_0.ui.screens.components.ExerciseCardForExerciseList
 
 @Composable
 @ExperimentalMaterialApi
@@ -46,5 +45,4 @@ fun ExerciseListContent(
             }
         }
     }
-
 }

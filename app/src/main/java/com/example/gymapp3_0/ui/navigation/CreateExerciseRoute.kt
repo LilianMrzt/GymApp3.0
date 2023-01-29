@@ -19,36 +19,40 @@ enum class AddExerciseRoutes(@StringRes val title: Int) {
 fun NavGraphBuilder.exerciseListNavigation(
     navController: NavHostController,
     exerciseViewModel: ExerciseViewModel,
-    onCanNavigateBackChange: (Boolean) -> Unit,
-    onIsNavigationBarUpChange: (Boolean) -> Unit
+    @StringRes screenTitle: Int,
+    onIsNavigationBarUpChange: (Boolean) -> Unit,
 ) {
     navigation(
         startDestination = AddExerciseRoutes.StartCreateExercise.name,
         route = Screen.Exercises.route
     ) {
-
         //MainSessionBody
         composable(
             route = AddExerciseRoutes.StartCreateExercise.name
         ) {
+            onIsNavigationBarUpChange(true)
             ExercisesMainBody(
                 navigateToCreateExercise = {
                     navController.navigate(AddExerciseRoutes.CreateExercise.name)
                 },
+                screenTitle = screenTitle,
+                navController = navController
             )
         }
-
     }
 
     //CreateExercise
     composable(route = AddExerciseRoutes.CreateExercise.name) {
+        onIsNavigationBarUpChange(false)
         CreateExerciseBody(
             addExercise = { exercise ->
                 exerciseViewModel.addExercise(exercise)
             },
             navigateBackToAddExercise = {
                 navController.navigate(AddExerciseRoutes.StartCreateExercise.name)
-            }
+            },
+            screenTitle = screenTitle,
+            navController = navController
         )
     }
 }

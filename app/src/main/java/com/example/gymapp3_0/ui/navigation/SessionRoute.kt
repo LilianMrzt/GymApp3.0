@@ -12,7 +12,10 @@ import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants.Companion.SESSION_ID
 import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.ui.screens.Screen
-import com.example.gymapp3_0.ui.screens.session_screens.*
+import com.example.gymapp3_0.ui.screens.session_screens.AddExerciseBody
+import com.example.gymapp3_0.ui.screens.session_screens.CreateSessionBody
+import com.example.gymapp3_0.ui.screens.session_screens.SessionsMainBody
+import com.example.gymapp3_0.ui.screens.session_screens.ViewSessionBody
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
@@ -21,7 +24,6 @@ enum class AddSessionRoutes(@StringRes val title: Int) {
     CreateSession(R.string.create_session),
     SeeSession(R.string.see_session),
     AddExercise(R.string.add_exercise),
-    CreateExercise(R.string.create_exercise)
 }
 
 fun NavGraphBuilder.sessionListNavigation(
@@ -29,7 +31,8 @@ fun NavGraphBuilder.sessionListNavigation(
     sessionViewModel: SessionViewModel,
     exerciseViewModel: ExerciseViewModel,
     onCanNavigateBackChange: (Boolean) -> Unit,
-    onIsNavigationBarUpChange: (Boolean) -> Unit
+    onIsNavigationBarUpChange: (Boolean) -> Unit,
+    @StringRes screenTitle: Int,
 ) {
     navigation(
         startDestination = AddSessionRoutes.Start.name,
@@ -40,7 +43,6 @@ fun NavGraphBuilder.sessionListNavigation(
         composable(
             route = AddSessionRoutes.Start.name
         ) {
-            onCanNavigateBackChange(false)
             onIsNavigationBarUpChange(true)
             SessionsMainBody(
 
@@ -52,7 +54,8 @@ fun NavGraphBuilder.sessionListNavigation(
                 navigateToViewSession = { sessionId ->
                     navController.navigate("${AddSessionRoutes.SeeSession.name}/${sessionId}")
                 },
-                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>
+                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>,
+                screenTitle = screenTitle,
             )
         }
 
@@ -66,19 +69,17 @@ fun NavGraphBuilder.sessionListNavigation(
             )
         ) { backStackEntry ->
             val sessionId = backStackEntry.arguments?.getInt(SESSION_ID) ?: 0
-            onCanNavigateBackChange(true)
             onIsNavigationBarUpChange(false)
             ViewSessionBody(
                 sessionId = sessionId,
-                navigateBack = {
-                    navController.popBackStack()
-                }
+                screenTitle = screenTitle,
+                navController = navController
             )
         }
 
         //CreateSession
         composable(route = AddSessionRoutes.CreateSession.name) {
-
+            onIsNavigationBarUpChange(false)
             CreateSessionBody(
                 modifier = Modifier,
 
@@ -93,36 +94,22 @@ fun NavGraphBuilder.sessionListNavigation(
                 },
                 onIsNavigationBarUpChange = onIsNavigationBarUpChange,
                 onCanNavigateBackChange = onCanNavigateBackChange,
-                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>
+                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>,
+                screenTitle = screenTitle,
+                navController = navController
             )
         }
 
         //AddExercise
         composable(route = AddSessionRoutes.AddExercise.name) {
-            onCanNavigateBackChange(true)
             onIsNavigationBarUpChange(false)
             AddExerciseBody(
                 navigateBackToCreateSession = {
                     navController.navigate(AddSessionRoutes.CreateSession.name)
                 },
-                navigateToCreateExercise = {
-                    navController.navigate(AddSessionRoutes.CreateExercise.name)
-                },
-                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>
-            )
-        }
-
-        //CreateExercise
-        composable(route = AddSessionRoutes.CreateExercise.name) {
-            onCanNavigateBackChange(true)
-            onIsNavigationBarUpChange(false)
-            CreateExerciseBody(
-                addExercise = { exercise ->
-                    exerciseViewModel.addExercise(exercise)
-                },
-                navigateBackToAddExercise = {
-                    navController.navigate(AddSessionRoutes.AddExercise.name)
-                }
+                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>,
+                screenTitle = screenTitle,
+                navController = navController
             )
         }
     }
