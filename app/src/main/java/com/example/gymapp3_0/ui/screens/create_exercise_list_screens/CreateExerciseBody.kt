@@ -26,6 +26,7 @@ import androidx.navigation.NavController
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants
 import com.example.gymapp3_0.domain.models.ExerciseModel
+import com.example.gymapp3_0.domain.models.SetModel
 import com.example.gymapp3_0.ui.navigation.AddExerciseRoutes
 import com.example.gymapp3_0.ui.screens.components.TopBar
 
@@ -173,7 +174,7 @@ fun CreateExerciseBody(
                 }
 
                 if (isPressed) {
-                    val exercise = ExerciseModel(0, name, muscle)
+                    val exercise = ExerciseModel(0, name, muscle, false, listOf<SetModel>())
                     addExercise(exercise)
                 }
             }

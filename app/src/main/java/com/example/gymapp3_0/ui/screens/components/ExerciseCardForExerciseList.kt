@@ -17,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants
 import com.example.gymapp3_0.domain.models.ExerciseModel
+import com.example.gymapp3_0.domain.models.SetModel
 import com.example.gymapp3_0.domain.repository.Sessions
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
@@ -32,7 +33,9 @@ fun ExerciseCardForExerciseList(
 ) {
     var popupControl by remember { mutableStateOf(false) }
     var deleteClicked by remember { mutableStateOf(false) }
-    var exo2 = ExerciseModel(0, "", "", false)
+    var exo2 = ExerciseModel(
+        0, "", "", false, listOf(SetModel(0, 0, 0, 0))
+    )
 
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()

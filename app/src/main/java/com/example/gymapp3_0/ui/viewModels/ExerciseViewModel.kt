@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gymapp3_0.domain.models.ExerciseModel
+import com.example.gymapp3_0.domain.models.SetModel
 import com.example.gymapp3_0.domain.repository.ExerciseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +18,7 @@ class ExerciseViewModel @Inject constructor(
     private val repo: ExerciseRepository
 ) : ViewModel() {
 
-    var exercise by mutableStateOf(ExerciseModel(0, "", "", false))
+    var exercise by mutableStateOf(ExerciseModel(0, "", "", false, arrayListOf<SetModel>()))
     var openDialog by mutableStateOf(false)
     var exercises = repo.getExercisesFromRoom()
 

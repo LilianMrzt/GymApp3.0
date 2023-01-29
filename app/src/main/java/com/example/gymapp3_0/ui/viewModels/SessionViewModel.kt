@@ -25,8 +25,7 @@ class SessionViewModel @Inject constructor(
     var sessions = repo.getSessionsFromRoom()
 
     private val _uiState = MutableStateFlow(SessionUiState())
-
-    //val uiState: StateFlow<SessionUiState> = _uiState.asStateFlow()
+    
     var uiState by mutableStateOf(
         SessionUiState()
     )

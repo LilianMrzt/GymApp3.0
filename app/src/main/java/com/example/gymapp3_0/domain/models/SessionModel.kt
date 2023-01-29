@@ -22,5 +22,4 @@ class ExerciseTypeConverter {
     @TypeConverter
     fun jsonToList(value: String) =
         Gson().fromJson(value, Array<ExerciseModel>::class.java).toList()
-
 }
