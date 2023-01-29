@@ -28,9 +28,13 @@ fun CreateSessionBody(
     modifier: Modifier,
     addSession: (session: SessionModel) -> Unit,
     navigateToMainSession: () -> Unit,
-    navigateToAddExercises: () -> Unit
+    navigateToAddExercises: () -> Unit,
+    onCanNavigateBackChange: (Boolean) -> Unit,
+    onIsNavigationBarUpChange: (Boolean) -> Unit
 ) {
-
+    onCanNavigateBackChange(true)
+    onIsNavigationBarUpChange(false)
+    
     var name by remember { mutableStateOf(NO_VALUE) }
 
     val interactionSource = remember { MutableInteractionSource() }

@@ -26,7 +26,9 @@ enum class AddSessionRoutes(@StringRes val title: Int) {
 fun NavGraphBuilder.sessionListNavigation(
     navController: NavHostController,
     sessionViewModel: SessionViewModel,
-    exerciseViewModel: ExerciseViewModel
+    exerciseViewModel: ExerciseViewModel,
+    onCanNavigateBackChange: (Boolean) -> Unit,
+    onIsNavigationBarUpChange: (Boolean) -> Unit
 ) {
     navigation(
         startDestination = AddSessionRoutes.Start.name,
@@ -37,6 +39,8 @@ fun NavGraphBuilder.sessionListNavigation(
         composable(
             route = AddSessionRoutes.Start.name
         ) {
+            onCanNavigateBackChange(false)
+            onIsNavigationBarUpChange(true)
             SessionsMainBody(
 
                 navigateToCreateSession = {
@@ -60,6 +64,8 @@ fun NavGraphBuilder.sessionListNavigation(
             )
         ) { backStackEntry ->
             val sessionId = backStackEntry.arguments?.getInt(SESSION_ID) ?: 0
+            onCanNavigateBackChange(true)
+            onIsNavigationBarUpChange(false)
             ViewSessionBody(
                 sessionId = sessionId,
                 navigateBack = {
@@ -70,6 +76,7 @@ fun NavGraphBuilder.sessionListNavigation(
 
         //CreateSession
         composable(route = AddSessionRoutes.CreateSession.name) {
+
             CreateSessionBody(
                 modifier = Modifier,
 
@@ -81,12 +88,16 @@ fun NavGraphBuilder.sessionListNavigation(
                 },
                 navigateToAddExercises = {
                     navController.navigate(AddSessionRoutes.AddExercise.name)
-                }
+                },
+                onIsNavigationBarUpChange = onIsNavigationBarUpChange,
+                onCanNavigateBackChange = onCanNavigateBackChange
             )
         }
 
         //AddExercise
         composable(route = AddSessionRoutes.AddExercise.name) {
+            onCanNavigateBackChange(true)
+            onIsNavigationBarUpChange(false)
             AddExerciseBody(
                 navigateBackToCreateSession = {
                     navController.navigate(AddSessionRoutes.CreateSession.name)
@@ -99,6 +110,8 @@ fun NavGraphBuilder.sessionListNavigation(
 
         //CreateExercise
         composable(route = AddSessionRoutes.CreateExercise.name) {
+            onCanNavigateBackChange(true)
+            onIsNavigationBarUpChange(false)
             CreateExerciseBody(
                 addExercise = { exercise ->
                     exerciseViewModel.addExercise(exercise)

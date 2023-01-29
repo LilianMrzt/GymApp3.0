@@ -18,7 +18,9 @@ enum class AddExerciseRoutes(@StringRes val title: Int) {
 
 fun NavGraphBuilder.exerciseListNavigation(
     navController: NavHostController,
-    exerciseViewModel: ExerciseViewModel
+    exerciseViewModel: ExerciseViewModel,
+    onCanNavigateBackChange: (Boolean) -> Unit,
+    onIsNavigationBarUpChange: (Boolean) -> Unit
 ) {
     navigation(
         startDestination = AddExerciseRoutes.StartCreateExercise.name,
@@ -30,12 +32,12 @@ fun NavGraphBuilder.exerciseListNavigation(
             route = AddExerciseRoutes.StartCreateExercise.name
         ) {
             ExercisesMainBody(
-
                 navigateToCreateExercise = {
                     navController.navigate(AddExerciseRoutes.CreateExercise.name)
                 },
             )
         }
+
     }
 
     //CreateExercise
