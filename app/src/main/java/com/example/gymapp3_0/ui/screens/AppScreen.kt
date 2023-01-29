@@ -52,15 +52,6 @@ fun AppScreen() {
     }
 
     Scaffold(
-        /*
-        topBar = {
-            TopBar(title = currentScreenTitle, canNavigateBack = canNavigateBack) {
-                navController.navigateUp()
-            }
-        },
-
-         */
-
         bottomBar = {
             if (isBottomBarUp) {
                 BottomBar(navController) {

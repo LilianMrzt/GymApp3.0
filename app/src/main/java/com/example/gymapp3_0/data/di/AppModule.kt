@@ -4,14 +4,14 @@ import android.content.Context
 import androidx.room.Room
 import com.example.gymapp3_0.core.Constants.Companion.EXERCISE_TABLE
 import com.example.gymapp3_0.core.Constants.Companion.SESSION_TABLE
-import com.example.gymapp3_0.data.database.ExerciseDao
-import com.example.gymapp3_0.data.database.ExerciseDb
-import com.example.gymapp3_0.data.database.SessionDao
-import com.example.gymapp3_0.data.database.SessionDb
+import com.example.gymapp3_0.core.Constants.Companion.SET_TABLE
+import com.example.gymapp3_0.data.database.*
 import com.example.gymapp3_0.data.repository.ExerciseRepositoryImpl
 import com.example.gymapp3_0.data.repository.SessionRepositoryImpl
+import com.example.gymapp3_0.data.repository.SetRepositoryImpl
 import com.example.gymapp3_0.domain.repository.ExerciseRepository
 import com.example.gymapp3_0.domain.repository.SessionRepository
+import com.example.gymapp3_0.domain.repository.SetRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -65,5 +65,28 @@ class AppModule {
         exerciseDao: ExerciseDao
     ): ExerciseRepository = ExerciseRepositoryImpl(
         exerciseDao = exerciseDao
+    )
+
+    //Set Database
+    @Provides
+    fun provideSetDb(
+        @ApplicationContext
+        context: Context
+    ) = Room.databaseBuilder(
+        context,
+        SetDb::class.java,
+        SET_TABLE
+    ).build()
+
+    @Provides
+    fun provideSetDao(
+        setDb: SetDb
+    ) = setDb.setDao()
+
+    @Provides
+    fun provideSetRepository(
+        setDao: SetDao
+    ): SetRepository = SetRepositoryImpl(
+        setDao = setDao
     )
 }
