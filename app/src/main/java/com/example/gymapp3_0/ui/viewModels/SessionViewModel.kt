@@ -25,10 +25,27 @@ class SessionViewModel @Inject constructor(
     var sessions = repo.getSessionsFromRoom()
 
     private val _uiState = MutableStateFlow(SessionUiState())
-    
+
     var uiState by mutableStateOf(
-        SessionUiState()
+        SessionUiState(
+            sessionName = "",
+        )
     )
+
+    var username by mutableStateOf(uiState.sessionName)
+        private set
+
+    fun updateUsername(input: String) {
+        username = input
+    }
+
+
+    fun changeSessionName(name: String) {
+        //Stuff to save in data source
+        _uiState.value = SessionUiState(
+            sessionName = name,
+        )
+    }
 
     fun getSession(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         session = repo.getSessionFromRoom(id)

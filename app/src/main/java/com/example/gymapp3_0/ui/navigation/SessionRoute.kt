@@ -113,8 +113,8 @@ fun NavGraphBuilder.sessionListNavigation(
                 navigateToAddExercises = {
                     navController.navigate(AddSessionRoutes.AddExercise.name)
                 },
-                onIsNavigationBarUpChange = onIsNavigationBarUpChange,
                 onCanNavigateBackChange = onCanNavigateBackChange,
+                onIsNavigationBarUpChange = onIsNavigationBarUpChange,
                 temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>,
                 screenTitle = screenTitle,
                 navController = navController
