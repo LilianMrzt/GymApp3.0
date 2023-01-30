@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,7 +47,7 @@ fun CreateSessionBody(
     onCanNavigateBackChange(true)
     onIsNavigationBarUpChange(false)
 
-    var name by remember { mutableStateOf(NO_VALUE) }
+    var name by rememberSaveable { mutableStateOf("") }
 
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
@@ -72,7 +73,9 @@ fun CreateSessionBody(
                 item {
                     TextField(
                         value = name,
-                        onValueChange = { name = it },
+                        onValueChange = {
+                            name = it
+                        },
                         placeholder = {
                             Text(
                                 text = stringResource(R.string.session_name)

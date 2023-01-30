@@ -85,7 +85,7 @@ fun ExerciseCard(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            if (exercise.isSelected && !sessionViewModel.uiState.toBeDeleted) {
+            if (exercise.isSelected) {
                 Icon(
                     imageVector = Icons.Default.Check,
                     contentDescription = "selected"
