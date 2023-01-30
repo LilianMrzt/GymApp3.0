@@ -12,9 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.gymapp3_0.R
-import com.example.gymapp3_0.ui.navigation.exerciseListNavigation
 import com.example.gymapp3_0.ui.navigation.sessionListNavigation
-import com.example.gymapp3_0.ui.screens.components.BottomBar
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
@@ -52,13 +50,6 @@ fun AppScreen() {
     }
 
     Scaffold(
-        bottomBar = {
-            if (isBottomBarUp) {
-                BottomBar(navController) {
-                    currentScreenTitle = it.resourceId
-                }
-            }
-        },
         containerColor = MaterialTheme.colorScheme.background
 
     ) { innerPadding ->
@@ -103,11 +94,14 @@ fun AppBody(
             onIsNavigationBarUpChange = onIsNavigationBarUpChange,
             screenTitle = screenTitle,
         )
+
+        /*
         exerciseListNavigation(
             navController = navController,
             exerciseViewModel = exerciseViewModel,
             screenTitle = screenTitle,
             onIsNavigationBarUpChange = onIsNavigationBarUpChange,
         )
+         */
     }
 }

@@ -18,12 +18,20 @@ class ExerciseViewModel @Inject constructor(
     private val repo: ExerciseRepository
 ) : ViewModel() {
 
-    var exercise by mutableStateOf(ExerciseModel(0, "", "", false, arrayListOf<SetModel>()))
-    var openDialog by mutableStateOf(false)
+    private val modelList = MutableList<SetModel>(4) {
+        SetModel(
+            id = it,
+            reps = "8",
+            weight = "0",
+            restTime = "1"
+        )
+    }
+
+    var exercise: ExerciseModel by mutableStateOf(
+        ExerciseModel(0, "", "", false, modelList)
+    )
+    
     var exercises = repo.getExercisesFromRoom()
-
-    //var isSelected by mutableStateOf(false)
-
 
     fun getExercise(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         exercise = repo.getExerciseFromRoom(id)

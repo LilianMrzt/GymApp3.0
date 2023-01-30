@@ -27,7 +27,7 @@ import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants
 import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.domain.models.SetModel
-import com.example.gymapp3_0.ui.navigation.AddExerciseRoutes
+import com.example.gymapp3_0.ui.navigation.AddSessionRoutes
 import com.example.gymapp3_0.ui.screens.components.TopBar
 
 val MuscleList = listOf(
@@ -47,7 +47,7 @@ fun CreateExerciseBody(
     addExercise: (exercise: ExerciseModel) -> Unit,
     navigateBackToAddExercise: () -> Unit,
     @StringRes screenTitle: Int,
-    navController: NavController
+    navController: NavController,
 ) {
 
     var name by remember { mutableStateOf(Constants.NO_VALUE) }
@@ -69,7 +69,7 @@ fun CreateExerciseBody(
     Scaffold(
         topBar = {
             TopBar(title = screenTitle, canNavigateBack = true) {
-                navController.navigate(AddExerciseRoutes.StartCreateExercise.name)
+                navController.navigate(AddSessionRoutes.AddExercise.name)
             }
         },
         content = { padding ->
@@ -174,7 +174,15 @@ fun CreateExerciseBody(
                 }
 
                 if (isPressed) {
-                    val exercise = ExerciseModel(0, name, muscle, false, listOf<SetModel>())
+                    val exercise = ExerciseModel(0, name, muscle, false, MutableList<SetModel>(4) {
+                        SetModel(
+                            id = it,
+                            reps = "8",
+                            weight = "0",
+                            restTime = "1"
+                        )
+                    }
+                    )
                     addExercise(exercise)
                 }
             }
