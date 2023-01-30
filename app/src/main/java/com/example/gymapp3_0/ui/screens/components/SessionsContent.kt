@@ -1,5 +1,6 @@
 package com.example.gymapp3_0.ui.screens.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,6 +14,7 @@ import com.example.gymapp3_0.R
 import com.example.gymapp3_0.domain.models.SessionModel
 import com.example.gymapp3_0.domain.repository.Sessions
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 @ExperimentalMaterialApi
 fun SessionsContent(
@@ -35,6 +37,9 @@ fun SessionsContent(
                 .fillMaxSize()
                 .padding(padding)
         ) {
+            stickyHeader {
+                MainSessionHeader()
+            }
             items(
                 items = sessions
             ) { session ->
