@@ -1,0 +1,6 @@
+#Things that still have to be done
+
+- Fix Exercise not removing from temporaryList
+- Fix Name in session creation when entered before selecting exercises
+- Clean architecture and Components (especially the TextFields, TopBar)
+- Fix Set modification when updated

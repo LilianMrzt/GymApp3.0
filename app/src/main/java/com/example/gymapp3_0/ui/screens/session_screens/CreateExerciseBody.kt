@@ -2,6 +2,7 @@ package com.example.gymapp3_0.ui.screens.session_screens
 
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
@@ -28,6 +29,7 @@ import com.example.gymapp3_0.core.Constants
 import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.domain.models.SetModel
 import com.example.gymapp3_0.ui.navigation.AddSessionRoutes
+import com.example.gymapp3_0.ui.screens.components.CreateExerciseHeader
 import com.example.gymapp3_0.ui.screens.components.TopBar
 
 val MuscleList = listOf(
@@ -41,7 +43,7 @@ val MuscleList = listOf(
 )
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun CreateExerciseBody(
     addExercise: (exercise: ExerciseModel) -> Unit,
@@ -79,6 +81,10 @@ fun CreateExerciseBody(
                     .padding(padding),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                stickyHeader {
+                    CreateExerciseHeader()
+                }
+
                 item {
                     TextField(
                         value = name,
