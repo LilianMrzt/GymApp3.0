@@ -4,3 +4,4 @@
 - Fix Name in session creation when entered before selecting exercises
 - Clean architecture and Components (especially the TextFields, TopBar)
 - Fix Set modification when updated
+- Do exercise deletion popUp (again)
