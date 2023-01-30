@@ -22,7 +22,8 @@ fun TopBar(
     CenterAlignedTopAppBar(
         title = {
             Text(
-                text = stringResource(id = title),
+                //text = stringResource(id = title),
+                text = "",
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.titleLarge,

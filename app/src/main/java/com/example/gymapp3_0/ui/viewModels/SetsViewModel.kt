@@ -17,28 +17,47 @@ class SetsViewModel @Inject constructor(
     private val repo: SetRepository
 ) : ViewModel() {
 
-    var set by mutableStateOf(SetModel(0, 0, 0, 0))
+    var set by mutableStateOf(SetModel(0, "0", "0", "0"))
     var exercises = repo.getSetsFromRoom()
-    
-    fun getExercise(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+
+    fun getSet(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         set = repo.getSetFromRoom(id)
     }
 
-    fun addExercise(set: SetModel) {
+    fun addSet(set: SetModel) {
         viewModelScope.launch(Dispatchers.IO) {
             repo.addSetToRoom(set)
         }
     }
 
-    fun updateExercise(set: SetModel) {
+    fun updateSet(set: SetModel) {
         viewModelScope.launch(Dispatchers.IO) {
             repo.updateSetInRoom(set)
         }
     }
 
-    fun deleteExercise(set: SetModel) {
+    fun deleteSet(set: SetModel) {
         viewModelScope.launch(Dispatchers.IO) {
             repo.deleteSetFromRoom(set)
         }
     }
+
+    fun updateWeight(weight: String) {
+        set = set.copy(
+            weight = weight
+        )
+    }
+
+    fun updateReps(reps: String) {
+        set = set.copy(
+            reps = reps
+        )
+    }
+
+    fun updateRest(rest: String) {
+        set = set.copy(
+            restTime = rest
+        )
+    }
+
 }

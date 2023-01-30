@@ -9,8 +9,8 @@ import com.example.gymapp3_0.core.Constants
 data class SetModel(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
-    var weight: Int,
-    var reps: Int,
-    var restTime: Int,
+    var weight: String,
+    var reps: String,
+    var restTime: String,
 )
 

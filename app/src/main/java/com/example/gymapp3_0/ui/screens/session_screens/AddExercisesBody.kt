@@ -23,7 +23,8 @@ fun AddExerciseBody(
     navigateBackToCreateSession: () -> Unit,
     temporaryList: MutableList<ExerciseModel>,
     @StringRes screenTitle: Int,
-    navController: NavController
+    navController: NavController,
+    navigateToCreateExercise: () -> Unit,
 ) {
 
     val exercises by viewModel.exercises.collectAsState(
@@ -40,7 +41,8 @@ fun AddExerciseBody(
             ExerciseContent(
                 padding = padding,
                 exercises = exercises,
-                temporaryList = temporaryList
+                temporaryList = temporaryList,
+                navigateToCreateExercise
             )
         },
         floatingActionButton = {

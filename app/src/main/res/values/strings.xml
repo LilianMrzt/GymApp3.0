@@ -36,5 +36,6 @@
     <string name="exercises">Exercises</string>
     <string name="no_exercise_created">Start by creating an exercise</string>
     <string name="back_button">back</string>
+    <string name="see_exercise_sets">see_exercise_sets</string>
 
 </resources>

@@ -34,8 +34,15 @@ fun ExerciseCardForExerciseList(
     var popupControl by remember { mutableStateOf(false) }
     var deleteClicked by remember { mutableStateOf(false) }
     var exo2 = ExerciseModel(
-        0, "", "", false, listOf(SetModel(0, 0, 0, 0))
-    )
+        0, "", "", false, MutableList<SetModel>(4) {
+            SetModel(
+                id = it,
+                reps = "8",
+                weight = "0",
+                restTime = "1"
+            )
+        })
+            
 
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
