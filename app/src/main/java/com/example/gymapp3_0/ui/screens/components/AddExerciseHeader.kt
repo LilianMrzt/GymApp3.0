@@ -6,6 +6,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -17,9 +18,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AddExerciseTopCard(
+fun AddExerciseHeader(
     navigateToCreateExercise: () -> Unit,
 ) {
+
     Card(
         modifier = Modifier
             .fillMaxWidth(),
@@ -36,7 +38,8 @@ fun AddExerciseTopCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            Spacer(modifier = Modifier.width(24.dp))
+            Spacer(modifier = Modifier.width(48.dp))
+
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = "Select the exercises to add",
@@ -55,6 +58,19 @@ fun AddExerciseTopCard(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
+                    contentDescription = "",
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            IconButton(
+                onClick = {
+                },
+                modifier = Modifier
+                    .size(30.dp)
+                    .padding(0.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.MoreVert,
                     contentDescription = "",
                     tint = MaterialTheme.colorScheme.onSurface
                 )

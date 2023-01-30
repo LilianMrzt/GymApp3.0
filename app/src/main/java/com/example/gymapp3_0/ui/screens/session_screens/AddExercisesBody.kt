@@ -5,9 +5,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gymapp3_0.domain.models.ExerciseModel
@@ -27,6 +25,8 @@ fun AddExerciseBody(
     navigateToCreateExercise: () -> Unit,
 ) {
 
+    var toBeDeleted by remember { mutableStateOf(false) }
+
     val exercises by viewModel.exercises.collectAsState(
         initial = emptyList()
     )
@@ -42,7 +42,7 @@ fun AddExerciseBody(
                 padding = padding,
                 exercises = exercises,
                 temporaryList = temporaryList,
-                navigateToCreateExercise
+                navigateToCreateExercise = navigateToCreateExercise,
             )
         },
         floatingActionButton = {

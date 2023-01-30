@@ -27,8 +27,11 @@ fun ExerciseContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         stickyHeader {
-            AddExerciseTopCard(navigateToCreateExercise)
+            AddExerciseHeader(
+                navigateToCreateExercise
+            )
         }
+
         items(
             items = exercises
         ) { item ->
