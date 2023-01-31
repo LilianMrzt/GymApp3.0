@@ -25,6 +25,7 @@ fun AddSetAlertDialog(
     closeDialog: () -> Unit,
     setsViewModel: SetsViewModel = hiltViewModel(),
     exerciseModel: ExerciseModel,
+    exerciseId: Int,
 ) {
     var title by remember { mutableStateOf(NO_VALUE) }
     var author by remember { mutableStateOf(NO_VALUE) }
@@ -83,7 +84,14 @@ fun AddSetAlertDialog(
                 TextButton(
                     onClick = {
                         closeDialog()
-                        val set = SetModel(0, title, author, author)
+                        val set =
+                            SetModel(
+                                id = 0,
+                                title,
+                                author,
+                                author,
+                                exerciseId,
+                            )
                         /*
                         val setList = exerciseModel.setList.map { it }.toMutableList()
                         setList.add(set)

@@ -33,7 +33,7 @@ fun ViewExerciseSetsBody(
     setsViewModel: SetsViewModel = hiltViewModel(),
     exerciseId: Int,
     @StringRes screenTitle: Int,
-    navController: NavController
+    navController: NavController,
 ) {
     LaunchedEffect(Unit) {
         exerciseViewModel.getExercise(exerciseId)
@@ -41,7 +41,7 @@ fun ViewExerciseSetsBody(
     val sets by setsViewModel.sets.collectAsState(
         initial = emptyList()
     )
-    
+
     Scaffold(
         topBar = {
             TopBar(canNavigateBack = true) {
@@ -64,21 +64,23 @@ fun ViewExerciseSetsBody(
                 items(
                     items = sets
                 ) { set ->
-                    SetContentCard2(
-                        set = set,
-                        updateWeight = { weight ->
-                            setsViewModel.updateWeight(weight)
-                        },
-                        updateReps = { reps ->
-                            setsViewModel.updateReps(reps)
-                        },
-                        updateRestTime = { restTime ->
-                            setsViewModel.updateRest(restTime)
-                        },
-                        updateSet = { set2 ->
-                            setsViewModel.updateSet(set2)
-                        }
-                    )
+                    if (set.exerciseId == exerciseId) {
+                        SetContentCard2(
+                            set = set,
+                            updateWeight = { weight ->
+                                setsViewModel.updateWeight(weight)
+                            },
+                            updateReps = { reps ->
+                                setsViewModel.updateReps(reps)
+                            },
+                            updateRestTime = { restTime ->
+                                setsViewModel.updateRest(restTime)
+                            },
+                            updateSet = { set2 ->
+                                setsViewModel.updateSet(set2)
+                            }
+                        )
+                    }
                 }
                 item {
                     Button(onClick = {
@@ -103,20 +105,10 @@ fun ViewExerciseSetsBody(
                 closeDialog = {
                     setsViewModel.closeDialog()
                 },
-                exerciseModel = exerciseViewModel.exercise
-            )
-            /*
-            AddSetAlertDialog(
-                openDialog = setsViewModel.openDialog,
-                closeDialog = {
-                    setsViewModel.closeDialog()
-                },
-                addSet = { set ->
-                    setsViewModel.addSet(set)
-                }
-            )
-            
-             */
+                exerciseModel = exerciseViewModel.exercise,
+                exerciseId = exerciseId,
+
+                )
         }
     )
 

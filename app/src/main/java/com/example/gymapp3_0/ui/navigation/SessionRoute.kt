@@ -86,7 +86,7 @@ fun NavGraphBuilder.sessionListNavigation(
             arguments = listOf(
                 navArgument(Constants.EXERCISE_ID) {
                     type = IntType
-                }
+                },
             )
         ) { backStackEntry ->
             val exerciseId = backStackEntry.arguments?.getInt(Constants.EXERCISE_ID) ?: 0
@@ -94,8 +94,9 @@ fun NavGraphBuilder.sessionListNavigation(
             ViewExerciseSetsBody(
                 exerciseId = exerciseId,
                 screenTitle = screenTitle,
-                navController = navController
-            )
+                navController = navController,
+
+                )
         }
 
         //CreateSession

@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.domain.models.ExerciseModel
-import com.example.gymapp3_0.domain.models.SetModel
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
@@ -35,14 +34,7 @@ fun ExerciseCard(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
 
-    var exo2 = ExerciseModel(0, "", "", false, MutableList<SetModel>(4) {
-        SetModel(
-            id = it,
-            reps = "8",
-            weight = "0",
-            restTime = "1"
-        )
-    })
+    var exo2 = ExerciseModel(exercise.id, "", "", false, mutableListOf())
 
     ElevatedCard(
         shape = RoundedCornerShape(10.dp),
