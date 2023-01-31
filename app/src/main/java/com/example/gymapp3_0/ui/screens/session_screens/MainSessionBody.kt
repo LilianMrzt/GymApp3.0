@@ -47,7 +47,7 @@ fun SessionsMainBody(
 
     Scaffold(
         topBar = {
-            TopBar(title = screenTitle, canNavigateBack = false) { }
+            TopBar(canNavigateBack = false) { }
         },
         content = { padding ->
             SessionsContent(

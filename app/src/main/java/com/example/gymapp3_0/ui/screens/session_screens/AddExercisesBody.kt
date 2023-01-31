@@ -33,7 +33,7 @@ fun AddExerciseBody(
 
     Scaffold(
         topBar = {
-            TopBar(title = screenTitle, canNavigateBack = true) {
+            TopBar(canNavigateBack = true) {
                 navController.navigate(AddSessionRoutes.CreateSession.name)
             }
         },

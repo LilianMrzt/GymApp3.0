@@ -12,5 +12,6 @@ data class SetModel(
     var weight: String,
     var reps: String,
     var restTime: String,
+    var exerciseId: Int,
 )
 

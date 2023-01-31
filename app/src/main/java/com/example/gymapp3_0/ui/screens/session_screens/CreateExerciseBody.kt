@@ -27,7 +27,6 @@ import androidx.navigation.NavController
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants
 import com.example.gymapp3_0.domain.models.ExerciseModel
-import com.example.gymapp3_0.domain.models.SetModel
 import com.example.gymapp3_0.ui.navigation.AddSessionRoutes
 import com.example.gymapp3_0.ui.screens.components.CreateExerciseHeader
 import com.example.gymapp3_0.ui.screens.components.TopBar
@@ -70,7 +69,7 @@ fun CreateExerciseBody(
 
     Scaffold(
         topBar = {
-            TopBar(title = screenTitle, canNavigateBack = true) {
+            TopBar(canNavigateBack = true) {
                 navController.navigate(AddSessionRoutes.AddExercise.name)
             }
         },
@@ -180,14 +179,8 @@ fun CreateExerciseBody(
                 }
 
                 if (isPressed) {
-                    val exercise = ExerciseModel(0, name, muscle, false, MutableList<SetModel>(4) {
-                        SetModel(
-                            id = it,
-                            reps = "8",
-                            weight = "0",
-                            restTime = "1"
-                        )
-                    }
+                    val exercise = ExerciseModel(
+                        0, name, muscle, false, mutableListOf()
                     )
                     addExercise(exercise)
                 }

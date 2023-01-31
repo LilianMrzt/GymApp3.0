@@ -12,6 +12,7 @@ class Constants {
         //Arguments
         const val SESSION_ID = "sessionId"
         const val EXERCISE_ID = "exerciseId"
+        const val SET_ID = "setId"
 
         //Actions
         const val ADD_SESSION = "Add a session."
