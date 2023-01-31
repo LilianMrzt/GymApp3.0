@@ -22,4 +22,14 @@ interface ExerciseDao {
 
     @Delete
     fun deleteExercise(exercise: ExerciseModel)
+
+    /*
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertSet(set: SetModel)
+
+    @Transaction
+    @Query("SELECT * FROM ${Constants.EXERCISE_TABLE} WHERE id = :id")
+    fun getExerciseWithSets(exerciseId: Int): List<ExerciseWithSets>
+
+     */
 }

@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -21,13 +23,11 @@ import com.example.gymapp3_0.ui.viewModels.SetsViewModel
 fun SetContentCard(
     set: SetModel,
     setsViewModel: SetsViewModel = hiltViewModel(),
+    updateWeight: (weight: String) -> Unit,
+    updateReps: (reps: String) -> Unit,
+    updateRestTime: (rest: String) -> Unit,
+    updateSet: (set: SetModel) -> Unit,
 ) {
-
-    var weight by remember { mutableStateOf("0") }
-    var reps by remember { mutableStateOf("0") }
-    var restTime by remember { mutableStateOf("0") }
-
-
     ElevatedCard(
         shape = RoundedCornerShape(15.dp),
         modifier = Modifier
@@ -90,10 +90,9 @@ fun SetContentCard(
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     TextField(
                                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                                        value = weight,
-                                        onValueChange = {
-                                            weight = it
-                                            setsViewModel.updateWeight(weight)
+                                        value = set.weight,
+                                        onValueChange = { weight ->
+                                            updateWeight(weight)
                                         },
                                         modifier = Modifier.width(70.dp),
                                         singleLine = true,
@@ -142,10 +141,9 @@ fun SetContentCard(
                             ) {
                                 TextField(
                                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                                    value = reps,
-                                    onValueChange = {
-                                        reps = it
-                                        setsViewModel.updateReps(reps)
+                                    value = set.reps,
+                                    onValueChange = { reps ->
+                                        updateReps(reps)
                                     },
                                     modifier = Modifier.width(70.dp),
                                     singleLine = true,
@@ -189,10 +187,9 @@ fun SetContentCard(
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     TextField(
                                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                                        value = restTime,
-                                        onValueChange = {
-                                            restTime = it
-                                            setsViewModel.updateRest(restTime)
+                                        value = set.restTime,
+                                        onValueChange = { restTime ->
+                                            updateRestTime(restTime)
                                         },
                                         modifier = Modifier.width(70.dp),
                                         singleLine = true,
@@ -216,6 +213,21 @@ fun SetContentCard(
                     }
                 }
             }
+
+            IconButton(
+                onClick = {
+                    updateSet(set)
+                },
+                modifier = Modifier
+                    .size(30.dp)
+                    .padding(0.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Check,
+                    contentDescription = "",
+                )
+            }
+
         }
     }
 }

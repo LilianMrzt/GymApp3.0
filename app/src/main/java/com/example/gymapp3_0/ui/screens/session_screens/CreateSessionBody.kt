@@ -54,7 +54,7 @@ fun CreateSessionBody(
 
     Scaffold(
         topBar = {
-            TopBar(title = screenTitle, canNavigateBack = true) {
+            TopBar(canNavigateBack = true) {
                 navController.navigate(AddSessionRoutes.Start.name)
             }
         },

@@ -19,7 +19,9 @@ class SetsViewModel @Inject constructor(
 
     var set by mutableStateOf(SetModel(0, "0", "0", "0"))
     var exercises = repo.getSetsFromRoom()
-
+    var openDialog by mutableStateOf(false)
+    val sets = repo.getSetsFromRoom()
+    
     fun getSet(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         set = repo.getSetFromRoom(id)
     }
@@ -58,6 +60,14 @@ class SetsViewModel @Inject constructor(
         set = set.copy(
             restTime = rest
         )
+    }
+
+    fun openDialog() {
+        openDialog = true
+    }
+
+    fun closeDialog() {
+        openDialog = false
     }
 
 }
