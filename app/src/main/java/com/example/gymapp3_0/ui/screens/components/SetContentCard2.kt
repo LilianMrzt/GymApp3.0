@@ -24,6 +24,7 @@ fun SetContentCard2(
     updateSet: (set: SetModel) -> Unit,
     setsViewModel: SetsViewModel = hiltViewModel()
 ) {
+    
     ElevatedCard(
         shape = RoundedCornerShape(15.dp),
         modifier = Modifier

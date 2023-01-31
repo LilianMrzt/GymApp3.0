@@ -9,10 +9,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.gymapp3_0.R
-import com.example.gymapp3_0.core.Constants
+import com.example.gymapp3_0.core.Constants.Companion.EXERCISE_ID
 import com.example.gymapp3_0.core.Constants.Companion.SESSION_ID
+import com.example.gymapp3_0.core.Constants.Companion.SET_ID
 import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.ui.screens.Screen
+import com.example.gymapp3_0.ui.screens.components.test.UpdateSetScreen
 import com.example.gymapp3_0.ui.screens.session_screens.*
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
@@ -23,7 +25,8 @@ enum class AddSessionRoutes(@StringRes val title: Int) {
     SeeSession(R.string.see_session),
     AddExercise(R.string.add_exercise),
     SeeExerciseSets(R.string.see_exercise_sets),
-    CreateExercise(R.string.create_exercise)
+    CreateExercise(R.string.create_exercise),
+    UpdateSet(R.string.update_set)
 }
 
 fun NavGraphBuilder.sessionListNavigation(
@@ -82,21 +85,40 @@ fun NavGraphBuilder.sessionListNavigation(
 
         //SeeExerciseSets
         composable(
-            route = "${AddSessionRoutes.SeeExerciseSets.name}/{${Constants.EXERCISE_ID}}",
+            route = "${AddSessionRoutes.SeeExerciseSets.name}/{${EXERCISE_ID}}",
             arguments = listOf(
-                navArgument(Constants.EXERCISE_ID) {
+                navArgument(EXERCISE_ID) {
                     type = IntType
                 },
             )
         ) { backStackEntry ->
-            val exerciseId = backStackEntry.arguments?.getInt(Constants.EXERCISE_ID) ?: 0
+            val exerciseId = backStackEntry.arguments?.getInt(EXERCISE_ID) ?: 0
             onIsNavigationBarUpChange(false)
             ViewExerciseSetsBody(
                 exerciseId = exerciseId,
                 screenTitle = screenTitle,
                 navController = navController,
+                navigateToUpdateSetScreen = { setId ->
+                    navController.navigate("${AddSessionRoutes.UpdateSet.name}/${setId}")
+                }
+            )
+        }
 
-                )
+        //UpdateSet
+        composable(
+            route = "${AddSessionRoutes.UpdateSet.name}/{${SET_ID}}",
+            arguments = listOf(
+                navArgument(SET_ID) {
+                    type = IntType
+                },
+            )
+        ) { backStackEntry ->
+            val setId = backStackEntry.arguments?.getInt(SET_ID) ?: 0
+            UpdateSetScreen(
+                setId = setId,
+                navigateBack = { navController.navigateUp() },
+                navController = navController
+            )
         }
 
         //CreateSession

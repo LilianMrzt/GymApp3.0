@@ -27,11 +27,14 @@ fun AddSetAlertDialog(
     exerciseModel: ExerciseModel,
     exerciseId: Int,
 ) {
-    var title by remember { mutableStateOf(NO_VALUE) }
-    var author by remember { mutableStateOf(NO_VALUE) }
-    val focusRequester = FocusRequester()
+
 
     if (openDialog) {
+        var weight by remember { mutableStateOf(NO_VALUE) }
+        var reps by remember { mutableStateOf(NO_VALUE) }
+        var restTime by remember { mutableStateOf(NO_VALUE) }
+        val focusRequester = FocusRequester()
+
         AlertDialog(
             onDismissRequest = closeDialog,
             title = {
@@ -40,11 +43,11 @@ fun AddSetAlertDialog(
             text = {
                 Column {
                     TextField(
-                        value = title,
-                        onValueChange = { title = it },
+                        value = weight,
+                        onValueChange = { weight = it },
                         placeholder = {
                             Text(
-                                text = "BOOK_TITLE"
+                                text = "Weight"
                             )
                         },
                         modifier = Modifier.focusRequester(focusRequester)
@@ -58,11 +61,11 @@ fun AddSetAlertDialog(
                         modifier = Modifier.height(16.dp)
                     )
                     TextField(
-                        value = author,
-                        onValueChange = { author = it },
+                        value = reps,
+                        onValueChange = { reps = it },
                         placeholder = {
                             Text(
-                                text = "AUTHOR"
+                                text = "Repetitions"
                             )
                         }
                     )
@@ -70,11 +73,11 @@ fun AddSetAlertDialog(
                         modifier = Modifier.height(16.dp)
                     )
                     TextField(
-                        value = author,
-                        onValueChange = { author = it },
+                        value = restTime,
+                        onValueChange = { restTime = it },
                         placeholder = {
                             Text(
-                                text = "AUTHOR"
+                                text = "Rest Time"
                             )
                         }
                     )
@@ -87,10 +90,10 @@ fun AddSetAlertDialog(
                         val set =
                             SetModel(
                                 id = 0,
-                                title,
-                                author,
-                                author,
-                                exerciseId,
+                                weight = weight,
+                                reps = reps,
+                                restTime = restTime,
+                                exerciseId = exerciseId,
                             )
                         /*
                         val setList = exerciseModel.setList.map { it }.toMutableList()
