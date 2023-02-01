@@ -25,6 +25,7 @@ fun UpdateSetScreen(
     Scaffold(
         topBar = {
             TopBar(canNavigateBack = true) {
+                setsViewModel.updateSet(setsViewModel.set)
                 navController.navigateUp()
             }
         },
@@ -41,11 +42,6 @@ fun UpdateSetScreen(
                 updateRestTime = { rest ->
                     setsViewModel.updateRest(rest)
                 },
-                updateSet = { set ->
-                    setsViewModel.updateSet(set)
-                },
-                navigateBack = navigateBack,
-                navController = navController
             )
         },
         floatingActionButton = {

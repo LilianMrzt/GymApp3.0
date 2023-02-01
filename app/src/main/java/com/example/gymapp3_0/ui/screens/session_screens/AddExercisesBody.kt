@@ -1,7 +1,6 @@
 package com.example.gymapp3_0.ui.screens.session_screens
 
 import androidx.annotation.StringRes
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
@@ -14,7 +13,7 @@ import com.example.gymapp3_0.ui.screens.components.ExerciseContent
 import com.example.gymapp3_0.ui.screens.components.TopBar
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddExerciseBody(
     viewModel: ExerciseViewModel = hiltViewModel(),
@@ -24,8 +23,6 @@ fun AddExerciseBody(
     navController: NavController,
     navigateToCreateExercise: () -> Unit,
 ) {
-
-    var toBeDeleted by remember { mutableStateOf(false) }
 
     val exercises by viewModel.exercises.collectAsState(
         initial = emptyList()

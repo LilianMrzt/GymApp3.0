@@ -9,9 +9,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.gymapp3_0.R
 import com.example.gymapp3_0.domain.models.SetModel
 
 
@@ -39,19 +39,29 @@ fun SetCard(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(
+                    start = 8.dp,
+                    end = 8.dp,
+                    top = 16.dp,
+                    bottom = 16.dp
+                ),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Card(
                 shape = CircleShape,
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier.size(30.dp),
             ) {
-                Text(
-                    text = "${set.id}",
+                Row(
                     modifier = Modifier.fillMaxSize(),
-                    textAlign = TextAlign.Center
-                )
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "${set.id}",
+                    )
+                }
+
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -61,48 +71,20 @@ fun SetCard(
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Card() {
-                    Column(
-                        Modifier
-                            .padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(text = "Weight")
+                SetInfoCard(
+                    title = R.string.weight,
+                    content = "${set.weight} kg"
+                )
 
-                        Text(
-                            text = "${set.weight} kg",
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                    }
-                }
-                Card() {
-                    Column(
-                        Modifier
-                            .padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(text = "Repetitions")
+                SetInfoCard(
+                    title = R.string.reps,
+                    content = set.reps
+                )
 
-                        Text(
-                            text = set.reps,
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                    }
-                }
-                Card() {
-                    Column(
-                        Modifier
-                            .padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(text = "Rest Time")
-
-                        Text(
-                            text = "${set.restTime} min",
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                    }
-                }
+                SetInfoCard(
+                    title = R.string.rest_time,
+                    content = "${set.restTime} min"
+                )
             }
 
             Spacer(modifier = Modifier.height(8.dp))

@@ -1,11 +1,4 @@
 <resources>
-    <string name="exercise1">Développé Couché</string>
-    <string name="muscle1">Pectoraux</string>
-    <string name="muscle2">Epaules</string>
-    <string name="muscle3">Triceps</string>
-    <string name="sessionID">sessionID</string>
-    <string name="exerciseID">exerciseID</string>
-
     //App Name
     <string name="app_name">GymApp3.0</string>
 
@@ -22,7 +15,6 @@
     <string name="create_exercise">Create Exercise</string>
 
 
-    //Placeholders
     <string name="session_name">Enter the name of the session</string>
     <string name="session_description">Enter the description of the session</string>
     <string name="exercise_name">Enter the name of the exercise</string>
@@ -39,5 +31,15 @@
     <string name="see_exercise_sets">see_exercise_sets</string>
     <string name="delete_session_confirmation">Are you sure you want to delete this session ?</string>
     <string name="update_set">update_set</string>
+    <string name="weight">Weight</string>
+    <string name="reps">Repetitions</string>
+    <string name="rest_time">Rest</string>
+    <string name="add_set">Add a Set</string>
+    <string name="add">Add</string>
+    <string name="update_rest_time">Update Rest Time</string>
+    <string name="update_reps">Update Repetitions</string>
+    <string name="update_weight">Update Weight</string>
+    <string name="select_exercise">Select an Exercise</string>
+    <string name="exercise">Exercise</string>
 
 </resources>

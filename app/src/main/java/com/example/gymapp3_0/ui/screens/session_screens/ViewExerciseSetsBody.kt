@@ -45,7 +45,8 @@ fun ViewExerciseSetsBody(
                 sets = sets,
                 navigateToUpdateSetScreen = navigateToUpdateSetScreen,
                 navController = navController,
-                exerciseId = exerciseId
+                exerciseId = exerciseId,
+                exercise = exerciseViewModel.exercise
             )
 
             AddSetAlertDialog(

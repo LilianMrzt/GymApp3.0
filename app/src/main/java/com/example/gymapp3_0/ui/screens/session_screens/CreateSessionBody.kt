@@ -27,7 +27,7 @@ import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.domain.models.SessionModel
 import com.example.gymapp3_0.ui.navigation.AddSessionRoutes
 import com.example.gymapp3_0.ui.screens.components.AddExerciseCard
-import com.example.gymapp3_0.ui.screens.components.CreateSessionHeader
+import com.example.gymapp3_0.ui.screens.components.BasicHeader
 import com.example.gymapp3_0.ui.screens.components.TopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -67,7 +67,7 @@ fun CreateSessionBody(
             ) {
 
                 stickyHeader {
-                    CreateSessionHeader()
+                    BasicHeader(title = R.string.create_session)
                 }
 
                 item {
