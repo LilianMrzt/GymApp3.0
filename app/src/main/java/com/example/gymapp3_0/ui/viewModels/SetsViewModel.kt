@@ -39,10 +39,8 @@ class SetsViewModel @Inject constructor(
         }
     }
 
-    fun deleteSet(set: SetModel) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repo.deleteSetFromRoom(set)
-        }
+    fun deleteSet(set: SetModel) = viewModelScope.launch(Dispatchers.IO) {
+        repo.deleteSetFromRoom(set)
     }
 
     fun updateWeight(weight: String) {

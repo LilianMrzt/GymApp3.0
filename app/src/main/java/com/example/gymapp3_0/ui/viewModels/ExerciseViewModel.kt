@@ -21,7 +21,6 @@ class ExerciseViewModel @Inject constructor(
         ExerciseModel(0, "", "", false, mutableListOf())
     )
 
-
     var exercises = repo.getExercisesFromRoom()
 
     fun getExercise(id: Int) = viewModelScope.launch(Dispatchers.IO) {
@@ -40,9 +39,8 @@ class ExerciseViewModel @Inject constructor(
         }
     }
 
-    fun deleteExercise(exercise: ExerciseModel) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repo.deleteExerciseFromRoom(exercise)
-        }
+    fun deleteExercise(exercise: ExerciseModel) = viewModelScope.launch(Dispatchers.IO) {
+        repo.deleteExerciseFromRoom(exercise)
+
     }
 }

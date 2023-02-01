@@ -40,6 +40,9 @@ fun AddExerciseBody(
                 exercises = exercises,
                 temporaryList = temporaryList,
                 navigateToCreateExercise = navigateToCreateExercise,
+                deleteExercise = { exercise ->
+                    viewModel.deleteExercise(exercise)
+                }
             )
         },
         floatingActionButton = {

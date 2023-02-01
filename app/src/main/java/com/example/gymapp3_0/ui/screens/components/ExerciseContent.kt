@@ -17,6 +17,7 @@ fun ExerciseContent(
     exercises: Exercises,
     temporaryList: MutableList<ExerciseModel>,
     navigateToCreateExercise: () -> Unit,
+    deleteExercise: (exercise: ExerciseModel) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier
@@ -32,17 +33,20 @@ fun ExerciseContent(
 
         items(
             items = exercises
-        ) { item ->
-            val copyExercise = item.copy()
+        ) { exercise ->
+            //val copyExercise = exercise.copy()
 
             ExerciseCard(
-                exercise = item,
+                exercise = exercise,
+                deleteExercise = {
+                    deleteExercise(exercise)
+                }
             )
 
-            if (!temporaryList.contains(copyExercise) && copyExercise.isSelected) {
-                temporaryList.add(copyExercise)
-            } else if (temporaryList.contains(copyExercise) && !copyExercise.isSelected) {
-                temporaryList.remove(copyExercise)
+            if (!temporaryList.contains(exercise) && exercise.isSelected) {
+                temporaryList.add(exercise)
+            } else if (temporaryList.contains(exercise) && !exercise.isSelected) {
+                temporaryList.remove(exercise)
             }
         }
     }

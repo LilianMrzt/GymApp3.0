@@ -1,8 +1,6 @@
 package com.example.gymapp3_0.ui.screens.components
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -27,12 +25,10 @@ fun ExerciseCard(
     exercise: ExerciseModel,
     ExerciseViewModel: ExerciseViewModel = hiltViewModel(),
     sessionViewModel: SessionViewModel = hiltViewModel(),
+    deleteExercise: () -> Unit,
 ) {
     val isSelected = remember { mutableStateOf(exercise.isSelected) }
-    var popupControl by remember { mutableStateOf(false) }
     var deleteClicked by remember { mutableStateOf(false) }
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
 
     var exo2 = ExerciseModel(exercise.id, "", "", false, mutableListOf())
 
@@ -98,7 +94,7 @@ fun ExerciseCard(
                     contentDescription = "",
                 )
             }
-
+            
             if (deleteClicked) {
                 AlertDialog(
                     onDismissRequest = {
@@ -114,13 +110,10 @@ fun ExerciseCard(
                         TextButton(
                             onClick = {
                                 deleteClicked = false
+                                deleteExercise()
                             },
-                            interactionSource = interactionSource
                         ) {
                             Text(stringResource(R.string.delete))
-                            if (isPressed) {
-                                ExerciseViewModel.deleteExercise(exo2)
-                            }
                         }
                     },
                     dismissButton = {

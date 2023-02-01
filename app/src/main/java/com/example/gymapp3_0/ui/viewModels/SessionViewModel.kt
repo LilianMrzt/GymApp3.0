@@ -72,9 +72,7 @@ class SessionViewModel @Inject constructor(
         }
     }
 
-    fun deleteSession(session: SessionModel) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repo.deleteSessionFromRoom(session)
-        }
+    fun deleteSession(session: SessionModel) = viewModelScope.launch(Dispatchers.IO) {
+        repo.deleteSessionFromRoom(session)
     }
 }
