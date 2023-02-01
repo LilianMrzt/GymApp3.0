@@ -28,7 +28,7 @@ import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants
 import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.ui.navigation.AddSessionRoutes
-import com.example.gymapp3_0.ui.screens.components.CreateExerciseHeader
+import com.example.gymapp3_0.ui.screens.components.BasicHeader
 import com.example.gymapp3_0.ui.screens.components.TopBar
 
 val MuscleList = listOf(
@@ -81,7 +81,7 @@ fun CreateExerciseBody(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 stickyHeader {
-                    CreateExerciseHeader()
+                    BasicHeader(R.string.create_exercise)
                 }
 
                 item {
@@ -164,15 +164,14 @@ fun CreateExerciseBody(
                             })
                         ) {
                             MuscleList.forEach() { label ->
-                                androidx.compose.material.DropdownMenuItem(
+                                DropdownMenuItem(
                                     onClick = {
                                         muscle = label
                                         expanded = false
                                         muscleSelected = true
                                     },
-                                ) {
-                                    Text(text = label)
-                                }
+                                    text = { Text(text = label) }
+                                )
                             }
                         }
                     }

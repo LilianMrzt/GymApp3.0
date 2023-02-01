@@ -11,10 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants.Companion.ROUNDED_CORNER
 import com.example.gymapp3_0.domain.models.SetModel
 
@@ -27,9 +28,6 @@ fun UpdateSetContent(
     updateWeight: (weight: String) -> Unit,
     updateReps: (reps: String) -> Unit,
     updateRestTime: (rest: String) -> Unit,
-    updateSet: (set: SetModel) -> Unit,
-    navigateBack: () -> Unit,
-    navController: NavController
 ) {
     LazyColumn(
         modifier = Modifier
@@ -46,7 +44,10 @@ fun UpdateSetContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = "Update Weight", textAlign = TextAlign.Center)
+                Text(
+                    text = stringResource(id = R.string.update_weight),
+                    textAlign = TextAlign.Center
+                )
 
                 TextField(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -56,7 +57,9 @@ fun UpdateSetContent(
                     },
                     placeholder = {
                         Text(
-                            text = "Weight"
+                            text = stringResource(id = R.string.weight),
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center
                         )
                     },
                     modifier = Modifier
@@ -86,7 +89,7 @@ fun UpdateSetContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = "Update Repetitions", textAlign = TextAlign.Center)
+                Text(text = stringResource(id = R.string.update_reps), textAlign = TextAlign.Center)
 
                 TextField(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -96,7 +99,9 @@ fun UpdateSetContent(
                     },
                     placeholder = {
                         Text(
-                            text = "Reps"
+                            text = stringResource(id = R.string.reps),
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center
                         )
                     },
                     modifier = Modifier
@@ -127,7 +132,10 @@ fun UpdateSetContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text = "Update Rest Time", textAlign = TextAlign.Center)
+                Text(
+                    text = stringResource(id = R.string.update_rest_time),
+                    textAlign = TextAlign.Center
+                )
 
                 TextField(
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -137,7 +145,9 @@ fun UpdateSetContent(
                     },
                     placeholder = {
                         Text(
-                            text = "Rest"
+                            text = stringResource(id = R.string.rest_time),
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center
                         )
                     },
                     modifier = Modifier
@@ -158,8 +168,6 @@ fun UpdateSetContent(
                     shape = RoundedCornerShape(ROUNDED_CORNER)
                 )
             }
-
         }
-
     }
 }
