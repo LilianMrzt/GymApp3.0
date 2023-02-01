@@ -1,13 +1,17 @@
-package com.example.gymapp3_0.ui.screens.components.test
+package com.example.gymapp3_0.ui.screens.session_screens
 
-import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gymapp3_0.ui.screens.components.TopBar
+import com.example.gymapp3_0.ui.screens.components.UpdateSetContent
 import com.example.gymapp3_0.ui.viewModels.SetsViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UpdateSetScreen(
     setsViewModel: SetsViewModel = hiltViewModel(),
@@ -40,8 +44,25 @@ fun UpdateSetScreen(
                 updateSet = { set ->
                     setsViewModel.updateSet(set)
                 },
-                navigateBack = navigateBack
+                navigateBack = navigateBack,
+                navController = navController
             )
-        }
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+                    setsViewModel.updateSet(setsViewModel.set)
+                    navigateBack()
+
+                },
+            ) {
+                Icon(
+                    Icons.Filled.Check,
+                    contentDescription = "Create Session"
+                )
+            }
+
+        },
+        floatingActionButtonPosition = FabPosition.End
     )
 }

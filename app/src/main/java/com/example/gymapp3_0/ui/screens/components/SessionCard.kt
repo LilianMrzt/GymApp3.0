@@ -42,7 +42,7 @@ fun SessionCard(
                 sessionName = session.name,
             )
 
-            DeleteSessonContent(session = session)
+            DeleteSessionContent(session = session)
         }
     }
 }

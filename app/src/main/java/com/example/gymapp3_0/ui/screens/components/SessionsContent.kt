@@ -4,7 +4,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,7 +15,6 @@ import com.example.gymapp3_0.domain.repository.Sessions
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-@ExperimentalMaterialApi
 fun SessionsContent(
     padding: PaddingValues,
     sessions: Sessions,
