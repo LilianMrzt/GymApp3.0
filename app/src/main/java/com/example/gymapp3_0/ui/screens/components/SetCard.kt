@@ -11,8 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.domain.models.SetModel
+import com.example.gymapp3_0.ui.viewModels.SetsViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -20,7 +22,8 @@ import com.example.gymapp3_0.domain.models.SetModel
 fun SetCard(
     set: SetModel,
     navigateToUpdateSetScreen: (setId: Int) -> Unit,
-    //setsViewModel: SetsViewModel = hiltViewModel()
+    setsViewModel: SetsViewModel = hiltViewModel(),
+    deleteSet: () -> Unit,
 ) {
     ElevatedCard(
         shape = RoundedCornerShape(10.dp),
@@ -92,6 +95,7 @@ fun SetCard(
             IconButton(
                 onClick = {
                     //setsViewModel.deleteSet(set)
+                    setsViewModel.openDialogForModification()
                 },
                 modifier = Modifier
                     .size(30.dp)
@@ -102,6 +106,11 @@ fun SetCard(
                     contentDescription = "",
                 )
             }
+            DeleteSetAlertDialog(
+                openDialogForModification = setsViewModel.openDialogForModification,
+                closeDialogForModification = { setsViewModel.closeDialogForModification() },
+                deleteSet = deleteSet
+            )
         }
     }
 }
@@ -111,6 +120,7 @@ fun SetCard(
 fun SetCardPreview() {
     SetCard(
         set = SetModel(id = 1, weight = "14", reps = "8", restTime = "1", exerciseId = 1),
-        navigateToUpdateSetScreen = {}
+        navigateToUpdateSetScreen = {},
+        deleteSet = {}
     )
 }

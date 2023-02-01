@@ -46,7 +46,10 @@ fun ViewExerciseSetsBody(
                 navigateToUpdateSetScreen = navigateToUpdateSetScreen,
                 navController = navController,
                 exerciseId = exerciseId,
-                exercise = exerciseViewModel.exercise
+                exercise = exerciseViewModel.exercise,
+                deleteSet = { set ->
+                    setsViewModel.deleteSet(set)
+                }
             )
 
             AddSetAlertDialog(

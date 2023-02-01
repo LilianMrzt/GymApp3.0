@@ -20,8 +20,6 @@ fun SessionCard(
     navigateToViewSession: (sessionID: Int) -> Unit,
     sessionViewModel: SessionViewModel = hiltViewModel()
 ) {
-
-
     ElevatedCard(
         shape = RoundedCornerShape(ROUNDED_CORNER),
         modifier = Modifier
@@ -42,7 +40,10 @@ fun SessionCard(
                 sessionName = session.name,
             )
 
-            DeleteSessionContent(session = session)
+            DeleteSessionContent(
+                session = session,
+                deleteSession = deleteSession
+            )
         }
     }
 }

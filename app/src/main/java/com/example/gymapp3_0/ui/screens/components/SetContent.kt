@@ -15,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.domain.models.ExerciseModel
+import com.example.gymapp3_0.domain.models.SetModel
 import com.example.gymapp3_0.domain.repository.Sets
 import com.example.gymapp3_0.ui.viewModels.SetsViewModel
 
@@ -27,7 +28,8 @@ fun SetContent(
     setsViewModel: SetsViewModel = hiltViewModel(),
     navController: NavController,
     exerciseId: Int,
-    exercise: ExerciseModel
+    exercise: ExerciseModel,
+    deleteSet: (set: SetModel) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier
@@ -46,14 +48,16 @@ fun SetContent(
             if (set.exerciseId == exerciseId) {
                 SetCard(
                     set = set,
-                    navigateToUpdateSetScreen = navigateToUpdateSetScreen
+                    navigateToUpdateSetScreen = navigateToUpdateSetScreen,
+                    deleteSet = {
+                        deleteSet(set)
+                    }
                 )
             }
         }
 
         item {
             Button(onClick = {
-                //openDialog = true
                 setsViewModel.openDialog()
             }) {
                 Text(text = "Add Set")

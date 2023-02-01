@@ -41,5 +41,6 @@
     <string name="update_weight">Update Weight</string>
     <string name="select_exercise">Select an Exercise</string>
     <string name="exercise">Exercise</string>
+    <string name="delete_set_confirmation">Are you sure you want to delete this set ?</string>
 
 </resources>

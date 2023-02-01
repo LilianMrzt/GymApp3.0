@@ -1,7 +1,5 @@
 package com.example.gymapp3_0.ui.screens.components
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -20,11 +18,10 @@ import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 fun DeleteSessionContent(
     sessionViewModel: SessionViewModel = hiltViewModel(),
     session: SessionModel,
+    deleteSession: () -> Unit,
 ) {
 
     var deleteClicked by remember { mutableStateOf(false) }
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
 
     IconButton(
         onClick = {
@@ -54,14 +51,11 @@ fun DeleteSessionContent(
             confirmButton = {
                 TextButton(
                     onClick = {
+                        deleteSession()
                         deleteClicked = false
                     },
-                    interactionSource = interactionSource
                 ) {
                     Text(stringResource(R.string.delete))
-                    if (isPressed) {
-                        sessionViewModel.deleteSession(session)
-                    }
                 }
             },
             dismissButton = {

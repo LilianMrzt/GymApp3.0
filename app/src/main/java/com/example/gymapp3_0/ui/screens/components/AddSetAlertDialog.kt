@@ -34,8 +34,6 @@ fun AddSetAlertDialog(
     exerciseModel: ExerciseModel,
     exerciseId: Int,
 ) {
-
-
     if (openDialog) {
         var weight by remember { mutableStateOf(NO_VALUE) }
         var reps by remember { mutableStateOf(NO_VALUE) }
