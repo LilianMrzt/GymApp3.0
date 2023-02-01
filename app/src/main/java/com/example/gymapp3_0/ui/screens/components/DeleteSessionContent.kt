@@ -17,7 +17,7 @@ import com.example.gymapp3_0.domain.models.SessionModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 @Composable
-fun DeleteSessonContent(
+fun DeleteSessionContent(
     sessionViewModel: SessionViewModel = hiltViewModel(),
     session: SessionModel,
 ) {

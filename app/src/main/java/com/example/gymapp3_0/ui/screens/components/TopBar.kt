@@ -8,8 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.example.gymapp3_0.R
 
-
-//TOP BAR OK
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(

@@ -1,8 +1,6 @@
 package com.example.gymapp3_0.ui.screens.session_screens
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -12,15 +10,12 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gymapp3_0.ui.screens.components.AddSetAlertDialog
+import com.example.gymapp3_0.ui.screens.components.SetContent
 import com.example.gymapp3_0.ui.screens.components.TopBar
-import com.example.gymapp3_0.ui.screens.components.test.SetContent
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SetsViewModel
 
-@OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,
-    ExperimentalMaterialApi::class
-)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ViewExerciseSetsBody(
     exerciseViewModel: ExerciseViewModel = hiltViewModel(),
