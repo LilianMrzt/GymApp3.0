@@ -62,10 +62,9 @@ fun ViewExerciseSetsBody(
                 exercise = exerciseViewModel.exercise,
                 exerciseId = exerciseId,
                 temporarySetList = temporarySetList,
-                addSet = { set ->
-                    setsViewModel.addSet(set)
-                }
-            )
+            ) { set ->
+                setsViewModel.addSet(set)
+            }
         }
     )
 }

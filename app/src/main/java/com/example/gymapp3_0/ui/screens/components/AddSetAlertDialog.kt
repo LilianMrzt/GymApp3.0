@@ -133,8 +133,6 @@ fun AddSetAlertDialog(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        closeDialog()
-
                         val set =
                             SetModel(
                                 id = 0,
@@ -143,8 +141,11 @@ fun AddSetAlertDialog(
                                 restTime = restTime,
                                 exerciseId = exerciseId,
                             )
-
+                        //exercise.setList.add(set)
+                        //exerciseViewModel.updateExercise(exercise)
                         addSet(set)
+                        //addSetToExercise(set)
+                        closeDialog()
                     },
                 ) {
                     Text(stringResource(R.string.add))

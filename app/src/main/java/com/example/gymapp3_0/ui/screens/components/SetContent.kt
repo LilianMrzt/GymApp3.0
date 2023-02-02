@@ -44,12 +44,22 @@ fun SetContent(
         items(
             items = sets
         ) { set ->
-            if (set.exerciseId == exerciseId) {
+
+            val setCopy = SetModel(
+                id = set.id,
+                weight = set.weight,
+                reps = set.reps,
+                restTime = set.restTime,
+                exerciseId = set.exerciseId
+            )
+
+            if (setCopy.exerciseId == exerciseId) {
+
                 SetCard(
-                    set = set,
+                    set = setCopy,
                     navigateToUpdateSetScreen = navigateToUpdateSetScreen,
                     deleteSet = {
-                        deleteSet(set)
+                        deleteSet(setCopy)
                     }
                 )
             }

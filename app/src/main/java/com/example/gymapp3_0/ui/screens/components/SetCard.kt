@@ -5,9 +5,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -24,6 +25,7 @@ fun SetCard(
     setsViewModel: SetsViewModel = hiltViewModel(),
     deleteSet: () -> Unit,
 ) {
+    var deleteClicked by remember { mutableStateOf(false) }
     ElevatedCard(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
@@ -76,7 +78,8 @@ fun SetCard(
 
             IconButton(
                 onClick = {
-                    setsViewModel.openDialogForModification()
+                    deleteClicked = true
+                    //setsViewModel.openDialogForModification()
                 },
                 modifier = Modifier
                     .size(30.dp)
@@ -87,11 +90,47 @@ fun SetCard(
                     contentDescription = "",
                 )
             }
+            /*
             DeleteSetAlertDialog(
                 openDialogForModification = setsViewModel.openDialogForModification,
                 closeDialogForModification = { setsViewModel.closeDialogForModification() },
                 deleteSet = deleteSet
             )
+
+             */
+
+            if (deleteClicked) {
+                AlertDialog(
+                    onDismissRequest = {
+                        deleteClicked = false
+                    },
+                    title = {
+                        Text(text = stringResource(R.string.warning))
+                    },
+                    text = {
+                        Text(text = stringResource(R.string.delete_exercise_confirmation))
+                    },
+                    confirmButton = {
+                        TextButton(
+                            onClick = {
+                                deleteClicked = false
+                                deleteSet()
+                            },
+                        ) {
+                            Text(stringResource(R.string.delete))
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = {
+                                deleteClicked = false
+                            }
+                        ) {
+                            Text(stringResource(R.string.cancel))
+                        }
+                    }
+                )
+            }
         }
     }
 }

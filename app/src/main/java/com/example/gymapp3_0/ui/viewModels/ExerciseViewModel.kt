@@ -22,7 +22,9 @@ class ExerciseViewModel @Inject constructor(
         ExerciseModel(0, "", "", false, mutableListOf())
     )
     val temporarySetList: MutableList<SetModel> = mutableListOf()
-    
+    var exoSets = exercise.setList
+
+
     var exercises = repo.getExercisesFromRoom()
 
     fun getExercise(id: Int) = viewModelScope.launch(Dispatchers.IO) {
@@ -33,6 +35,12 @@ class ExerciseViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             repo.addExerciseToRoom(exercise)
         }
+    }
+
+    fun addSetToExercise(set: SetModel) {
+        //val exoSets = exercise.setList
+        exoSets.add(set)
+        exercise = exercise.copy(setList = exoSets)
     }
 
     fun updateExercise(exercise: ExerciseModel) {

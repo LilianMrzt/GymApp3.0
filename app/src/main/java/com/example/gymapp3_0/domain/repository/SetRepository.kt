@@ -15,5 +15,4 @@ interface SetRepository {
     fun updateSetInRoom(set: SetModel)
 
     fun deleteSetFromRoom(set: SetModel)
-
 }
