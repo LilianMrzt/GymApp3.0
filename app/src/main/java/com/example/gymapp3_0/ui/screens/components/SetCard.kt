@@ -90,6 +90,7 @@ fun SetCard(
                     contentDescription = "",
                 )
             }
+            
             /*
             DeleteSetAlertDialog(
                 openDialogForModification = setsViewModel.openDialogForModification,

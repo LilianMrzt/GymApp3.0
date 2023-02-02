@@ -1,5 +1,6 @@
 package com.example.gymapp3_0.ui.screens.components
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -43,6 +45,7 @@ fun AddSetAlertDialog(
         var reps by remember { mutableStateOf(NO_VALUE) }
         var restTime by remember { mutableStateOf(NO_VALUE) }
         val focusRequester = FocusRequester()
+        val context = LocalContext.current
 
         AlertDialog(
             onDismissRequest = closeDialog,
@@ -133,19 +136,21 @@ fun AddSetAlertDialog(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        val set =
-                            SetModel(
-                                id = 0,
-                                weight = weight,
-                                reps = reps,
-                                restTime = restTime,
-                                exerciseId = exerciseId,
-                            )
-                        //exercise.setList.add(set)
-                        //exerciseViewModel.updateExercise(exercise)
-                        addSet(set)
-                        //addSetToExercise(set)
-                        closeDialog()
+                        if (weight != NO_VALUE && reps != NO_VALUE && restTime != NO_VALUE) {
+                            val set =
+                                SetModel(
+                                    id = 0,
+                                    weight = weight,
+                                    reps = reps,
+                                    restTime = restTime,
+                                    exerciseId = exerciseId,
+                                )
+                            addSet(set)
+                            closeDialog()
+                        } else {
+                            Toast.makeText(context, "Please complete everything", Toast.LENGTH_LONG)
+                                .show()
+                        }
                     },
                 ) {
                     Text(stringResource(R.string.add))

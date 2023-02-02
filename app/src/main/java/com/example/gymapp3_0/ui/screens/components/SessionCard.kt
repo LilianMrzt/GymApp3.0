@@ -32,7 +32,7 @@ fun SessionCard(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 10.dp, end = 10.dp, top = 15.dp, bottom = 15.dp),
+                .padding(16.dp),
         ) {
 
 
