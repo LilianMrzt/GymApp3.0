@@ -17,6 +17,7 @@ import com.example.gymapp3_0.ui.screens.Screen
 import com.example.gymapp3_0.ui.screens.session_screens.*
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
+import com.example.gymapp3_0.ui.viewModels.SetsViewModel
 
 enum class AddSessionRoutes(@StringRes val title: Int) {
     Start(R.string.main_session_screen),
@@ -32,6 +33,7 @@ fun NavGraphBuilder.sessionListNavigation(
     navController: NavHostController,
     sessionViewModel: SessionViewModel,
     exerciseViewModel: ExerciseViewModel,
+    setsViewModel: SetsViewModel,
     onCanNavigateBackChange: (Boolean) -> Unit,
     onIsNavigationBarUpChange: (Boolean) -> Unit,
     @StringRes screenTitle: Int,
@@ -56,7 +58,7 @@ fun NavGraphBuilder.sessionListNavigation(
                 navigateToViewSession = { sessionId ->
                     navController.navigate("${AddSessionRoutes.SeeSession.name}/${sessionId}")
                 },
-                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>,
+                temporaryList = sessionViewModel.temporaryList as MutableList<ExerciseModel>,
                 screenTitle = screenTitle,
             )
         }
@@ -99,7 +101,8 @@ fun NavGraphBuilder.sessionListNavigation(
                 navController = navController,
                 navigateToUpdateSetScreen = { setId ->
                     navController.navigate("${AddSessionRoutes.UpdateSet.name}/${setId}")
-                }
+                },
+                temporarySetList = exerciseViewModel.temporarySetList,
             )
         }
 
@@ -137,7 +140,7 @@ fun NavGraphBuilder.sessionListNavigation(
                 },
                 onCanNavigateBackChange = onCanNavigateBackChange,
                 onIsNavigationBarUpChange = onIsNavigationBarUpChange,
-                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>,
+                temporaryList = sessionViewModel.temporaryList as MutableList<ExerciseModel>,
                 screenTitle = screenTitle,
                 navController = navController
             )
@@ -150,7 +153,7 @@ fun NavGraphBuilder.sessionListNavigation(
                 navigateBackToCreateSession = {
                     navController.navigate(AddSessionRoutes.CreateSession.name)
                 },
-                temporaryList = sessionViewModel.uiState.temporaryList as MutableList<ExerciseModel>,
+                temporaryList = sessionViewModel.temporaryList as MutableList<ExerciseModel>,
                 screenTitle = screenTitle,
                 navController = navController,
                 navigateToCreateExercise = {

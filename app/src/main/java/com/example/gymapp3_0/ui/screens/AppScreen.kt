@@ -15,6 +15,7 @@ import com.example.gymapp3_0.R
 import com.example.gymapp3_0.ui.navigation.sessionListNavigation
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
+import com.example.gymapp3_0.ui.viewModels.SetsViewModel
 
 sealed class Screen(
     val route: String,
@@ -76,6 +77,7 @@ fun AppBody(
     innerPadding: PaddingValues = PaddingValues(Dp(10.0f)),
     sessionViewModel: SessionViewModel = hiltViewModel(),
     exerciseViewModel: ExerciseViewModel = hiltViewModel(),
+    setsViewModel: SetsViewModel = hiltViewModel(),
     onCanNavigateBackChange: (Boolean) -> Unit,
     onIsNavigationBarUpChange: (Boolean) -> Unit,
     @StringRes screenTitle: Int,
@@ -93,15 +95,7 @@ fun AppBody(
             onCanNavigateBackChange = onCanNavigateBackChange,
             onIsNavigationBarUpChange = onIsNavigationBarUpChange,
             screenTitle = screenTitle,
+            setsViewModel = setsViewModel
         )
-
-        /*
-        exerciseListNavigation(
-            navController = navController,
-            exerciseViewModel = exerciseViewModel,
-            screenTitle = screenTitle,
-            onIsNavigationBarUpChange = onIsNavigationBarUpChange,
-        )
-         */
     }
 }

@@ -36,7 +36,7 @@ fun SessionsContent(
                 .padding(padding)
         ) {
             stickyHeader {
-                MainSessionHeader()
+                BasicHeader(R.string.my_sessions)
             }
             items(
                 items = sessions

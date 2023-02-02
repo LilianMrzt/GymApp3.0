@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gymapp3_0.domain.models.ExerciseModel
+import com.example.gymapp3_0.domain.models.SetModel
 import com.example.gymapp3_0.domain.repository.ExerciseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,8 @@ class ExerciseViewModel @Inject constructor(
     var exercise: ExerciseModel by mutableStateOf(
         ExerciseModel(0, "", "", false, mutableListOf())
     )
-
+    val temporarySetList: MutableList<SetModel> = mutableListOf()
+    
     var exercises = repo.getExercisesFromRoom()
 
     fun getExercise(id: Int) = viewModelScope.launch(Dispatchers.IO) {

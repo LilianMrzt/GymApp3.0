@@ -18,7 +18,6 @@ class SetsViewModel @Inject constructor(
 ) : ViewModel() {
 
     var set by mutableStateOf(SetModel(0, "0", "0", "0", 0))
-    var exercises = repo.getSetsFromRoom()
     var openDialog by mutableStateOf(false)
     var openDialogForModification by mutableStateOf(false)
     val sets = repo.getSetsFromRoom()

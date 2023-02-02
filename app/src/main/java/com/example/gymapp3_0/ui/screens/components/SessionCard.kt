@@ -40,8 +40,7 @@ fun SessionCard(
                 sessionName = session.name,
             )
 
-            DeleteSessionContent(
-                session = session,
+            DeleteSessionAlertDialog(
                 deleteSession = deleteSession
             )
         }

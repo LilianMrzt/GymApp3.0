@@ -9,15 +9,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gymapp3_0.R
-import com.example.gymapp3_0.domain.models.SessionModel
-import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 @Composable
-fun DeleteSessionContent(
-    sessionViewModel: SessionViewModel = hiltViewModel(),
-    session: SessionModel,
+fun DeleteSessionAlertDialog(
     deleteSession: () -> Unit,
 ) {
 

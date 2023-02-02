@@ -12,7 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MainSessionHeader() {
+fun UpdateSetHeader() {
     Card(
         modifier = Modifier
             .fillMaxWidth(),
@@ -28,9 +28,9 @@ fun MainSessionHeader() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "My Sessions",
+                text = "Update Set",
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface
             )
 
@@ -41,7 +41,7 @@ fun MainSessionHeader() {
                         start = 64.dp,
                         end = 64.dp,
                         top = 16.dp,
-                        bottom = 0.dp
+                        bottom = 16.dp
                     )
             )
         }

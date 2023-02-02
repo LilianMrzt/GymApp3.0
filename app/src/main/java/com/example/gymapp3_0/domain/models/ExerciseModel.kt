@@ -18,7 +18,7 @@ data class ExerciseModel(
     @ColumnInfo(name = "isSelected")
     var isSelected: Boolean = false,
 
-    var setList: List<SetModel>,
+    var setList: MutableList<SetModel>,
 )
 
 class SetTypeConverter {

@@ -1,7 +1,6 @@
 package com.example.gymapp3_0.ui.screens.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -51,23 +50,6 @@ fun SetCard(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Card(
-                shape = CircleShape,
-                modifier = Modifier.size(30.dp),
-            ) {
-                Row(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "${set.id}",
-                    )
-                }
-
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             Row(
                 Modifier
@@ -94,7 +76,6 @@ fun SetCard(
 
             IconButton(
                 onClick = {
-                    //setsViewModel.deleteSet(set)
                     setsViewModel.openDialogForModification()
                 },
                 modifier = Modifier

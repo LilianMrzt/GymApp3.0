@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.dp
 fun AddExerciseHeader(
     navigateToCreateExercise: () -> Unit,
 ) {
-
     Card(
         modifier = Modifier
             .fillMaxWidth(),
@@ -57,10 +56,11 @@ fun AddExerciseHeader(
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = "",
-                        tint = MaterialTheme.colorScheme.onSurface
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.padding(0.dp)
                     )
                 }
-                
+
                 IconButton(
                     onClick = {
                     },
@@ -71,7 +71,8 @@ fun AddExerciseHeader(
                     Icon(
                         imageVector = Icons.Default.MoreVert,
                         contentDescription = "",
-                        tint = MaterialTheme.colorScheme.onSurface
+                        tint = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.padding(0.dp)
                     )
                 }
             }

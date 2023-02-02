@@ -9,6 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.gymapp3_0.domain.models.SetModel
 import com.example.gymapp3_0.ui.screens.components.AddSetAlertDialog
 import com.example.gymapp3_0.ui.screens.components.SetContent
 import com.example.gymapp3_0.ui.screens.components.TopBar
@@ -23,7 +24,8 @@ fun ViewExerciseSetsBody(
     exerciseId: Int,
     @StringRes screenTitle: Int,
     navController: NavController,
-    navigateToUpdateSetScreen: (setId: Int) -> Unit
+    navigateToUpdateSetScreen: (setId: Int) -> Unit,
+    temporarySetList: MutableList<SetModel>,
 ) {
     LaunchedEffect(Unit) {
         exerciseViewModel.getExercise(exerciseId)
@@ -57,12 +59,13 @@ fun ViewExerciseSetsBody(
                 closeDialog = {
                     setsViewModel.closeDialog()
                 },
-                exerciseModel = exerciseViewModel.exercise,
+                exercise = exerciseViewModel.exercise,
                 exerciseId = exerciseId,
-
-                )
+                temporarySetList = temporarySetList,
+                addSet = { set ->
+                    setsViewModel.addSet(set)
+                }
+            )
         }
     )
-
-
 }

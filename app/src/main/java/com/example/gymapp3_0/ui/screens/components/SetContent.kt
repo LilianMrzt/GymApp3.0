@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.gymapp3_0.R
 import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.domain.models.SetModel
 import com.example.gymapp3_0.domain.repository.Sets
@@ -39,7 +38,7 @@ fun SetContent(
     ) {
 
         stickyHeader {
-            BasicHeader(title = R.string.exercise)
+            ViewExerciseSetsHeader(title = exercise.name)
         }
 
         items(
@@ -53,14 +52,6 @@ fun SetContent(
                         deleteSet(set)
                     }
                 )
-            }
-        }
-
-        item {
-            Button(onClick = {
-                setsViewModel.openDialog()
-            }) {
-                Text(text = "Add Set")
             }
         }
 

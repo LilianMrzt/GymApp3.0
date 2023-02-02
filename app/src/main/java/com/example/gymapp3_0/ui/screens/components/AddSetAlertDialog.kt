@@ -22,6 +22,7 @@ import com.example.gymapp3_0.core.Constants
 import com.example.gymapp3_0.core.Constants.Companion.NO_VALUE
 import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.domain.models.SetModel
+import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SetsViewModel
 import kotlinx.coroutines.job
 
@@ -31,8 +32,11 @@ fun AddSetAlertDialog(
     openDialog: Boolean,
     closeDialog: () -> Unit,
     setsViewModel: SetsViewModel = hiltViewModel(),
-    exerciseModel: ExerciseModel,
+    exercise: ExerciseModel,
     exerciseId: Int,
+    temporarySetList: MutableList<SetModel>,
+    exerciseViewModel: ExerciseViewModel = hiltViewModel(),
+    addSet: (set: SetModel) -> Unit,
 ) {
     if (openDialog) {
         var weight by remember { mutableStateOf(NO_VALUE) }
@@ -130,6 +134,7 @@ fun AddSetAlertDialog(
                 TextButton(
                     onClick = {
                         closeDialog()
+
                         val set =
                             SetModel(
                                 id = 0,
@@ -138,7 +143,8 @@ fun AddSetAlertDialog(
                                 restTime = restTime,
                                 exerciseId = exerciseId,
                             )
-                        setsViewModel.addSet(set)
+
+                        addSet(set)
                     },
                 ) {
                     Text(stringResource(R.string.add))
