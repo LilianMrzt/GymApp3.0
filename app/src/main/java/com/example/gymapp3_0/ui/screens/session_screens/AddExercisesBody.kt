@@ -22,6 +22,7 @@ fun AddExerciseBody(
     @StringRes screenTitle: Int,
     navController: NavController,
     navigateToCreateExercise: () -> Unit,
+    navigateToSettings: () -> Unit
 ) {
 
     val exercises by viewModel.exercises.collectAsState(
@@ -30,9 +31,13 @@ fun AddExerciseBody(
 
     Scaffold(
         topBar = {
-            TopBar(canNavigateBack = true) {
-                navController.navigate(AddSessionRoutes.CreateSession.name)
-            }
+            TopBar(
+                canNavigateBack = true,
+                navigateBack = {
+                    navController.navigate(AddSessionRoutes.CreateSession.name)
+                },
+                navigateToSettings = navigateToSettings
+            )
         },
         content = { padding ->
             ExerciseContent(

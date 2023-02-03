@@ -17,17 +17,21 @@ fun UpdateSetScreen(
     setsViewModel: SetsViewModel = hiltViewModel(),
     setId: Int,
     navigateBack: () -> Unit,
-    navController: NavController
+    navController: NavController,
+    navigateToSettings: () -> Unit
 ) {
     LaunchedEffect(Unit) {
         setsViewModel.getSet(setId)
     }
     Scaffold(
         topBar = {
-            TopBar(canNavigateBack = true) {
-                setsViewModel.updateSet(setsViewModel.set)
-                navController.navigateUp()
-            }
+            TopBar(
+                canNavigateBack = true,
+                navigateBack = {
+                    navController.navigateUp()
+                },
+                navigateToSettings = navigateToSettings
+            )
         },
         content = { padding ->
             UpdateSetContent(

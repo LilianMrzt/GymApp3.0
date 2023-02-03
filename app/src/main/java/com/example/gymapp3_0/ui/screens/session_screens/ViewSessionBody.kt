@@ -30,15 +30,20 @@ fun ViewSessionBody(
     @StringRes screenTitle: Int,
     navController: NavController,
     navigateToViewExerciseContent: (exerciseId: Int) -> Unit,
+    navigateToSettings: () -> Unit
 ) {
     LaunchedEffect(Unit) {
         sessionViewModel.getSession(sessionId)
     }
     Scaffold(
         topBar = {
-            TopBar(canNavigateBack = true) {
-                navController.navigate(AddSessionRoutes.Start.name)
-            }
+            TopBar(
+                canNavigateBack = true,
+                navigateBack = {
+                    navController.navigate(AddSessionRoutes.Start.name)
+                },
+                navigateToSettings = navigateToSettings
+            )
         },
         content = { paddingValues ->
             LazyColumn(

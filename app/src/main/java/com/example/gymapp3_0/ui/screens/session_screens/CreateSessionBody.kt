@@ -39,13 +39,12 @@ fun CreateSessionBody(
     navigateToMainSession: () -> Unit,
     navigateToAddExercises: () -> Unit,
     onCanNavigateBackChange: (Boolean) -> Unit,
-    onIsNavigationBarUpChange: (Boolean) -> Unit,
     temporaryList: MutableList<ExerciseModel>,
     @StringRes screenTitle: Int,
-    navController: NavController
+    navController: NavController,
+    navigateToSettings: () -> Unit
 ) {
     onCanNavigateBackChange(true)
-    onIsNavigationBarUpChange(false)
 
     var name by rememberSaveable { mutableStateOf("") }
 
@@ -54,9 +53,13 @@ fun CreateSessionBody(
 
     Scaffold(
         topBar = {
-            TopBar(canNavigateBack = true) {
-                navController.navigate(AddSessionRoutes.Start.name)
-            }
+            TopBar(
+                canNavigateBack = true,
+                navigateBack = {
+                    navController.navigate(AddSessionRoutes.Start.name)
+                },
+                navigateToSettings = navigateToSettings
+            )
         },
         content = { padding ->
             LazyColumn(

@@ -31,6 +31,7 @@ fun SessionsMainBody(
     navigateToViewSession: (sessionID: Int) -> Unit,
     temporaryList: MutableList<ExerciseModel>,
     @StringRes screenTitle: Int,
+    navigateToSettings: () -> Unit
 ) {
 
     val sessions by sessionViewModel.sessions.collectAsState(
@@ -46,7 +47,11 @@ fun SessionsMainBody(
 
     Scaffold(
         topBar = {
-            TopBar(canNavigateBack = false) { }
+            TopBar(
+                canNavigateBack = false,
+                navigateBack = { },
+                navigateToSettings = navigateToSettings
+            )
         },
         content = { padding ->
             SessionsContent(

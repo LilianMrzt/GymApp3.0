@@ -26,7 +26,8 @@ enum class AddSessionRoutes(@StringRes val title: Int) {
     AddExercise(R.string.add_exercise),
     SeeExerciseSets(R.string.see_exercise_sets),
     CreateExercise(R.string.create_exercise),
-    UpdateSet(R.string.update_set)
+    UpdateSet(R.string.update_set),
+    Settings(R.string.settings)
 }
 
 fun NavGraphBuilder.sessionListNavigation(
@@ -35,7 +36,6 @@ fun NavGraphBuilder.sessionListNavigation(
     exerciseViewModel: ExerciseViewModel,
     setsViewModel: SetsViewModel,
     onCanNavigateBackChange: (Boolean) -> Unit,
-    onIsNavigationBarUpChange: (Boolean) -> Unit,
     @StringRes screenTitle: Int,
 ) {
     navigation(
@@ -47,7 +47,6 @@ fun NavGraphBuilder.sessionListNavigation(
         composable(
             route = AddSessionRoutes.Start.name
         ) {
-            onIsNavigationBarUpChange(true)
             SessionsMainBody(
 
                 navigateToCreateSession = {
@@ -60,6 +59,9 @@ fun NavGraphBuilder.sessionListNavigation(
                 },
                 temporaryList = sessionViewModel.temporaryList as MutableList<ExerciseModel>,
                 screenTitle = screenTitle,
+                navigateToSettings = {
+                    navController.navigate(AddSessionRoutes.Settings.name)
+                }
             )
         }
 
@@ -73,13 +75,15 @@ fun NavGraphBuilder.sessionListNavigation(
             )
         ) { backStackEntry ->
             val sessionId = backStackEntry.arguments?.getInt(SESSION_ID) ?: 0
-            onIsNavigationBarUpChange(false)
             ViewSessionBody(
                 sessionId = sessionId,
                 screenTitle = screenTitle,
                 navController = navController,
                 navigateToViewExerciseContent = { exerciseId ->
                     navController.navigate("${AddSessionRoutes.SeeExerciseSets.name}/${exerciseId}")
+                },
+                navigateToSettings = {
+                    navController.navigate(AddSessionRoutes.Settings.name)
                 }
             )
         }
@@ -94,7 +98,6 @@ fun NavGraphBuilder.sessionListNavigation(
             )
         ) { backStackEntry ->
             val exerciseId = backStackEntry.arguments?.getInt(EXERCISE_ID) ?: 0
-            onIsNavigationBarUpChange(false)
             ViewExerciseSetsBody(
                 exerciseId = exerciseId,
                 screenTitle = screenTitle,
@@ -103,6 +106,9 @@ fun NavGraphBuilder.sessionListNavigation(
                     navController.navigate("${AddSessionRoutes.UpdateSet.name}/${setId}")
                 },
                 temporarySetList = exerciseViewModel.temporarySetList,
+                navigateToSettings = {
+                    navController.navigate(AddSessionRoutes.Settings.name)
+                }
             )
         }
 
@@ -119,13 +125,15 @@ fun NavGraphBuilder.sessionListNavigation(
             UpdateSetScreen(
                 setId = setId,
                 navigateBack = { navController.navigateUp() },
-                navController = navController
+                navController = navController,
+                navigateToSettings = {
+                    navController.navigate(AddSessionRoutes.Settings.name)
+                }
             )
         }
 
         //CreateSession
         composable(route = AddSessionRoutes.CreateSession.name) {
-            onIsNavigationBarUpChange(false)
             CreateSessionBody(
                 modifier = Modifier,
 
@@ -139,16 +147,17 @@ fun NavGraphBuilder.sessionListNavigation(
                     navController.navigate(AddSessionRoutes.AddExercise.name)
                 },
                 onCanNavigateBackChange = onCanNavigateBackChange,
-                onIsNavigationBarUpChange = onIsNavigationBarUpChange,
                 temporaryList = sessionViewModel.temporaryList as MutableList<ExerciseModel>,
                 screenTitle = screenTitle,
-                navController = navController
+                navController = navController,
+                navigateToSettings = {
+                    navController.navigate(AddSessionRoutes.Settings.name)
+                }
             )
         }
 
         //AddExercise
         composable(route = AddSessionRoutes.AddExercise.name) {
-            onIsNavigationBarUpChange(false)
             AddExerciseBody(
                 navigateBackToCreateSession = {
                     navController.navigate(AddSessionRoutes.CreateSession.name)
@@ -158,13 +167,15 @@ fun NavGraphBuilder.sessionListNavigation(
                 navController = navController,
                 navigateToCreateExercise = {
                     navController.navigate(AddSessionRoutes.CreateExercise.name)
+                },
+                navigateToSettings = {
+                    navController.navigate(AddSessionRoutes.Settings.name)
                 }
             )
         }
 
         //CreateExercise
         composable(route = AddSessionRoutes.CreateExercise.name) {
-            onIsNavigationBarUpChange(false)
             CreateExerciseBody(
                 addExercise = { exercise ->
                     exerciseViewModel.addExercise(exercise)
@@ -173,6 +184,16 @@ fun NavGraphBuilder.sessionListNavigation(
                     navController.navigate(AddSessionRoutes.AddExercise.name)
                 },
                 screenTitle = screenTitle,
+                navController = navController,
+                navigateToSettings = {
+                    navController.navigate(AddSessionRoutes.Settings.name)
+                }
+            )
+        }
+
+        //Settings
+        composable(route = AddSessionRoutes.Settings.name) {
+            Settings(
                 navController = navController
             )
         }

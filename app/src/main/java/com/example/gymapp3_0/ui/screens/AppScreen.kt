@@ -93,7 +93,6 @@ fun AppBody(
             sessionViewModel = sessionViewModel,
             exerciseViewModel = exerciseViewModel,
             onCanNavigateBackChange = onCanNavigateBackChange,
-            onIsNavigationBarUpChange = onIsNavigationBarUpChange,
             screenTitle = screenTitle,
             setsViewModel = setsViewModel
         )

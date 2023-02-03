@@ -23,6 +23,7 @@ fun ViewExerciseSetsBody(
     navController: NavController,
     navigateToUpdateSetScreen: (setId: Int) -> Unit,
     temporarySetList: MutableList<SetModel>,
+    navigateToSettings: () -> Unit
 ) {
     LaunchedEffect(Unit) {
         exerciseViewModel.getExercise(exerciseId)
@@ -34,9 +35,13 @@ fun ViewExerciseSetsBody(
 
     Scaffold(
         topBar = {
-            TopBar(canNavigateBack = true) {
-                navController.navigateUp()
-            }
+            TopBar(
+                canNavigateBack = true,
+                navigateBack = {
+                    navController.navigateUp()
+                },
+                navigateToSettings = navigateToSettings
+            )
         },
         content = { padding ->
             SetContent(

@@ -49,6 +49,7 @@ fun CreateExerciseBody(
     navigateBackToAddExercise: () -> Unit,
     @StringRes screenTitle: Int,
     navController: NavController,
+    navigateToSettings: () -> Unit
 ) {
 
     var name by remember { mutableStateOf(Constants.NO_VALUE) }
@@ -69,9 +70,13 @@ fun CreateExerciseBody(
 
     Scaffold(
         topBar = {
-            TopBar(canNavigateBack = true) {
-                navController.navigate(AddSessionRoutes.AddExercise.name)
-            }
+            TopBar(
+                canNavigateBack = true,
+                navigateBack = {
+                    navController.navigate(AddSessionRoutes.AddExercise.name)
+                },
+                navigateToSettings = navigateToSettings
+            )
         },
         content = { padding ->
             LazyColumn(
