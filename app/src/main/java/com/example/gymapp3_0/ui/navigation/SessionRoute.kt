@@ -12,9 +12,16 @@ import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants.Companion.EXERCISE_ID
 import com.example.gymapp3_0.core.Constants.Companion.SESSION_ID
 import com.example.gymapp3_0.core.Constants.Companion.SET_ID
-import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.ui.screens.Screen
-import com.example.gymapp3_0.ui.screens.session_screens.*
+import com.example.gymapp3_0.ui.screens.session_screens.AddExerciseBody
+import com.example.gymapp3_0.ui.screens.session_screens.CreateExerciseBody
+import com.example.gymapp3_0.ui.screens.session_screens.CreateSessionBody
+import com.example.gymapp3_0.ui.screens.session_screens.SessionsMainBody
+import com.example.gymapp3_0.ui.screens.session_screens.Settings
+import com.example.gymapp3_0.ui.screens.session_screens.UpdateSetScreen
+import com.example.gymapp3_0.ui.screens.session_screens.ViewExerciseSetsBody
+import com.example.gymapp3_0.ui.screens.session_screens.ViewSessionBody
+import com.example.gymapp3_0.ui.screens.test.AddExerciseBodyTest
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 import com.example.gymapp3_0.ui.viewModels.SetsViewModel
@@ -27,7 +34,8 @@ enum class AddSessionRoutes(@StringRes val title: Int) {
     SeeExerciseSets(R.string.see_exercise_sets),
     CreateExercise(R.string.create_exercise),
     UpdateSet(R.string.update_set),
-    Settings(R.string.settings)
+    Settings(R.string.settings),
+    AddExerciseTest(R.string.test)
 }
 
 fun NavGraphBuilder.sessionListNavigation(
@@ -57,7 +65,7 @@ fun NavGraphBuilder.sessionListNavigation(
                 navigateToViewSession = { sessionId ->
                     navController.navigate("${AddSessionRoutes.SeeSession.name}/${sessionId}")
                 },
-                temporaryList = sessionViewModel.temporaryList as MutableList<ExerciseModel>,
+                temporaryList = sessionViewModel.temporaryList,
                 screenTitle = screenTitle,
                 navigateToSettings = {
                     navController.navigate(AddSessionRoutes.Settings.name)
@@ -84,7 +92,11 @@ fun NavGraphBuilder.sessionListNavigation(
                 },
                 navigateToSettings = {
                     navController.navigate(AddSessionRoutes.Settings.name)
+                },
+                navigateToAddExercise = {
+                    navController.navigate("${AddSessionRoutes.AddExerciseTest.name}/${sessionId}")
                 }
+
             )
         }
 
@@ -147,7 +159,7 @@ fun NavGraphBuilder.sessionListNavigation(
                     navController.navigate(AddSessionRoutes.AddExercise.name)
                 },
                 onCanNavigateBackChange = onCanNavigateBackChange,
-                temporaryList = sessionViewModel.temporaryList as MutableList<ExerciseModel>,
+                temporaryList = sessionViewModel.temporaryList,
                 screenTitle = screenTitle,
                 navController = navController,
                 navigateToSettings = {
@@ -162,7 +174,7 @@ fun NavGraphBuilder.sessionListNavigation(
                 navigateBackToCreateSession = {
                     navController.navigate(AddSessionRoutes.CreateSession.name)
                 },
-                temporaryList = sessionViewModel.temporaryList as MutableList<ExerciseModel>,
+                temporaryList = sessionViewModel.temporaryList,
                 screenTitle = screenTitle,
                 navController = navController,
                 navigateToCreateExercise = {
@@ -195,6 +207,34 @@ fun NavGraphBuilder.sessionListNavigation(
         composable(route = AddSessionRoutes.Settings.name) {
             Settings(
                 navController = navController
+            )
+        }
+
+
+        //Add Exercises Test
+        composable(
+            route = "${AddSessionRoutes.AddExerciseTest.name}/{${SESSION_ID}}",
+            arguments = listOf(
+                navArgument(SESSION_ID) {
+                    type = IntType
+                },
+            )
+        ) { backStackEntry ->
+            val sessionId = backStackEntry.arguments?.getInt(SESSION_ID) ?: 0
+            AddExerciseBodyTest(
+                navigateBackToCreateSession = {
+                    navController.navigate(AddSessionRoutes.CreateSession.name)
+                },
+                temporaryList = sessionViewModel.temporaryList,
+                screenTitle = screenTitle,
+                navController = navController,
+                navigateToCreateExercise = {
+                    navController.navigate(AddSessionRoutes.CreateExercise.name)
+                },
+                navigateToSettings = {
+                    navController.navigate(AddSessionRoutes.Settings.name)
+                },
+                sessionId = sessionId
             )
         }
     }

@@ -23,7 +23,7 @@ class ExerciseViewModel @Inject constructor(
     )
     val temporarySetList: MutableList<SetModel> = mutableListOf()
     var exoSets = exercise.setList
-
+    var openDialog by mutableStateOf(false)
 
     var exercises = repo.getExercisesFromRoom()
 
@@ -51,6 +51,13 @@ class ExerciseViewModel @Inject constructor(
 
     fun deleteExercise(exercise: ExerciseModel) = viewModelScope.launch(Dispatchers.IO) {
         repo.deleteExerciseFromRoom(exercise)
+    }
 
+    fun openDialog() {
+        openDialog = true
+    }
+
+    fun closeDialog() {
+        openDialog = false
     }
 }

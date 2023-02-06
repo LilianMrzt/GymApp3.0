@@ -1,4 +1,4 @@
-package com.example.gymapp3_0.ui.screens.components
+package com.example.gymapp3_0.ui.screens.test
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -12,7 +12,7 @@ import com.example.gymapp3_0.domain.repository.Exercises
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ExerciseContent(
+fun ExerciseContentTest(
     padding: PaddingValues,
     exercises: Exercises,
     temporaryList: MutableList<ExerciseModel>,
@@ -26,7 +26,7 @@ fun ExerciseContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         stickyHeader {
-            AddExerciseHeader(
+            AddExerciseHeaderTest(
                 navigateToCreateExercise
             )
         }
@@ -36,15 +36,13 @@ fun ExerciseContent(
         ) { exercise ->
             //val copyExercise = exercise.copy()
 
-            ExerciseCard(
+            ExerciseCardTest(
                 exercise = exercise,
                 deleteExercise = {
                     deleteExercise(exercise)
                 },
                 temporaryList = temporaryList
             )
-
-
         }
     }
 }

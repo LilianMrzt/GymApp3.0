@@ -18,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gymapp3_0.domain.models.ExerciseModel
 import com.example.gymapp3_0.ui.screens.components.SessionsContent
 import com.example.gymapp3_0.ui.screens.components.TopBar
+import com.example.gymapp3_0.ui.screens.test.AddSessionAlertDialog
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
@@ -65,17 +66,27 @@ fun SessionsMainBody(
 
             if (isPressed) {
                 temporaryList.clear()
-                exercises.forEach() { item ->
+                exercises.forEach { item ->
                     item.isSelected = false
                     exerciseViewModel.updateExercise(item)
                 }
             }
+
+            AddSessionAlertDialog(
+                openDialog = sessionViewModel.openDialog,
+                closeDialog = { sessionViewModel.closeDialog() },
+                addSession = { session ->
+                    sessionViewModel.addSession(session)
+                })
         },
 
 
         floatingActionButton = {
             FloatingActionButton(
-                onClick = navigateToCreateSession,
+                //onClick = navigateToCreateSession,
+                onClick = {
+                    sessionViewModel.openDialog()
+                },
                 interactionSource = interactionSource
             ) {
                 Icon(Icons.Filled.Add, contentDescription = "Add Session")
