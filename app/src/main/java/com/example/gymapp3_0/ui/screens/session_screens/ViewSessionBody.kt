@@ -7,11 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,9 +17,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.ui.navigation.AddSessionRoutes
-import com.example.gymapp3_0.ui.screens.components.BasicHeader
 import com.example.gymapp3_0.ui.screens.components.ExerciseCardForSessionView
 import com.example.gymapp3_0.ui.screens.components.TopBar
+import com.example.gymapp3_0.ui.screens.components.ViewSessionHeader
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -60,7 +56,10 @@ fun ViewSessionBody(
             ) {
 
                 stickyHeader {
-                    BasicHeader(title = R.string.select_exercise)
+                    ViewSessionHeader(
+                        title = R.string.select_exercise,
+                        navigateToAddExercise = navigateToAddExercise
+                    )
                 }
 
                 items(
@@ -72,16 +71,6 @@ fun ViewSessionBody(
                     )
                 }
             }
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = navigateToAddExercise,
-            ) {
-                Icon(
-                    Icons.Filled.Check,
-                    contentDescription = "Back to Create Session"
-                )
-            }
-        },
+        }
     )
 }

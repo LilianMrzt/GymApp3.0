@@ -18,7 +18,7 @@ class SessionViewModel @Inject constructor(
     private val repo: SessionRepository
 ) : ViewModel() {
 
-    var session by mutableStateOf(SessionModel(0, "", "", arrayListOf<ExerciseModel>()))
+    var session by mutableStateOf(SessionModel(0, "", arrayListOf<ExerciseModel>()))
     var openDialog by mutableStateOf(false)
     var sessions = repo.getSessionsFromRoom()
     val temporaryList: MutableList<ExerciseModel> = mutableListOf()

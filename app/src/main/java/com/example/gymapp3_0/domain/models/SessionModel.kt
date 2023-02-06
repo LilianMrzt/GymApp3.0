@@ -11,7 +11,6 @@ data class SessionModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     var name: String = "",
-    var description: String = "",
     var exerciseList: List<ExerciseModel>
 )
 

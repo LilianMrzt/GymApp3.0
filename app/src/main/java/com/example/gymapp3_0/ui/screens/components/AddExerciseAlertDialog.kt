@@ -1,6 +1,7 @@
 package com.example.gymapp3_0.ui.screens.components
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -114,7 +115,10 @@ fun AddExerciseAlertDialog(
                                 .onGloballyPositioned { coordinates ->
                                     textFieldSize = coordinates.size.toSize()
                                 },
-                            onClick = { expanded = !expanded }
+                            onClick = { expanded = !expanded },
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            ),
                         ) {
                             Row(
                                 modifier = Modifier
@@ -143,7 +147,7 @@ fun AddExerciseAlertDialog(
                             onDismissRequest = { expanded = false },
                             Modifier.width(with(LocalDensity.current) {
                                 textFieldSize.width.toDp()
-                            })
+                            }),
                         ) {
                             MuscleList.forEach { label ->
                                 DropdownMenuItem(
@@ -152,7 +156,8 @@ fun AddExerciseAlertDialog(
                                         expanded = false
                                         muscleSelected = true
                                     },
-                                    text = { Text(text = label) }
+                                    text = { Text(text = label) },
+                                    modifier = Modifier.background(MaterialTheme.colorScheme.surfaceVariant)
                                 )
                             }
                         }

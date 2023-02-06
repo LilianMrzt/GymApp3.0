@@ -31,8 +31,6 @@ fun ExerciseCardForSessionCreation(
     val isSelected = remember { mutableStateOf(exercise.isSelected) }
     var deleteClicked by remember { mutableStateOf(false) }
 
-    var exo2 = ExerciseModel(exercise.id, "", "", false, mutableListOf())
-
     ElevatedCard(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
@@ -84,7 +82,6 @@ fun ExerciseCardForSessionCreation(
             IconButton(
                 onClick = {
                     deleteClicked = true
-                    exo2 = exercise.copy()
                 },
                 modifier = Modifier
                     .size(30.dp)
