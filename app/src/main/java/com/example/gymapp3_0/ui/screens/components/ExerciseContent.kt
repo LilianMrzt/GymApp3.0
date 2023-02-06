@@ -16,7 +16,6 @@ fun ExerciseContent(
     padding: PaddingValues,
     exercises: Exercises,
     temporaryList: MutableList<ExerciseModel>,
-    navigateToCreateExercise: () -> Unit,
     deleteExercise: (exercise: ExerciseModel) -> Unit,
 ) {
     LazyColumn(
@@ -26,9 +25,7 @@ fun ExerciseContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         stickyHeader {
-            AddExerciseHeader(
-                navigateToCreateExercise
-            )
+            AddExerciseHeader()
         }
 
         items(
@@ -36,15 +33,13 @@ fun ExerciseContent(
         ) { exercise ->
             //val copyExercise = exercise.copy()
 
-            ExerciseCard(
+            ExerciseCardForSessionCreation(
                 exercise = exercise,
                 deleteExercise = {
                     deleteExercise(exercise)
                 },
                 temporaryList = temporaryList
             )
-
-
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.gymapp3_0.ui.screens.test
+package com.example.gymapp3_0.ui.screens.components
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column

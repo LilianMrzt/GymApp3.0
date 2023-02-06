@@ -16,9 +16,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gymapp3_0.domain.models.ExerciseModel
+import com.example.gymapp3_0.ui.screens.components.AddSessionAlertDialog
 import com.example.gymapp3_0.ui.screens.components.SessionsContent
 import com.example.gymapp3_0.ui.screens.components.TopBar
-import com.example.gymapp3_0.ui.screens.test.AddSessionAlertDialog
 import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
@@ -28,7 +28,6 @@ import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 fun SessionsMainBody(
     sessionViewModel: SessionViewModel = hiltViewModel(),
     exerciseViewModel: ExerciseViewModel = hiltViewModel(),
-    navigateToCreateSession: () -> Unit,
     navigateToViewSession: (sessionID: Int) -> Unit,
     temporaryList: MutableList<ExerciseModel>,
     @StringRes screenTitle: Int,

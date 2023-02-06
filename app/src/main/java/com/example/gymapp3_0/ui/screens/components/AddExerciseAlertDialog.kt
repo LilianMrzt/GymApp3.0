@@ -1,95 +1,67 @@
-package com.example.gymapp3_0.ui.screens.session_screens
+package com.example.gymapp3_0.ui.screens.components
 
-import android.annotation.SuppressLint
-import androidx.annotation.StringRes
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import android.widget.Toast
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
-import androidx.navigation.NavController
 import com.example.gymapp3_0.R
 import com.example.gymapp3_0.core.Constants
 import com.example.gymapp3_0.domain.models.ExerciseModel
-import com.example.gymapp3_0.ui.navigation.AddSessionRoutes
-import com.example.gymapp3_0.ui.screens.components.BasicHeader
-import com.example.gymapp3_0.ui.screens.components.TopBar
+import com.example.gymapp3_0.ui.screens.session_screens.MuscleList
+import kotlinx.coroutines.job
 
-val MuscleList = listOf(
-    "Pectoraux",
-    "Triceps",
-    "Biceps",
-    "Epaules",
-    "Dos",
-    "Abdominaux",
-    "Jambes"
-)
-
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CreateExerciseBody(
+fun AddExerciseAlertDialog(
+    openDialog: Boolean,
+    closeDialog: () -> Unit,
     addExercise: (exercise: ExerciseModel) -> Unit,
-    navigateBackToAddExercise: () -> Unit,
-    @StringRes screenTitle: Int,
-    navController: NavController,
-    navigateToSettings: () -> Unit
 ) {
+    if (openDialog) {
+        var name by remember { mutableStateOf(Constants.NO_VALUE) }
+        var muscle by remember { mutableStateOf(Constants.NO_VALUE) }
+        val focusRequester = FocusRequester()
+        val context = LocalContext.current
 
-    var name by remember { mutableStateOf(Constants.NO_VALUE) }
-    var muscle by remember { mutableStateOf(Constants.NO_VALUE) }
+        //DropDownMenu
+        var expanded by remember { mutableStateOf(false) }
+        var muscleSelected by remember { mutableStateOf(false) }
+        var textFieldSize by remember { mutableStateOf(Size.Zero) }
+        val icon = if (expanded) {
+            Icons.Filled.KeyboardArrowUp
+        } else {
+            Icons.Filled.KeyboardArrowDown
+        }
 
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-
-    //DropDownMenu
-    var expanded by remember { mutableStateOf(false) }
-    var muscleSelected by remember { mutableStateOf(false) }
-    var textFieldSize by remember { mutableStateOf(Size.Zero) }
-    val icon = if (expanded) {
-        Icons.Filled.KeyboardArrowUp
-    } else {
-        Icons.Filled.KeyboardArrowDown
-    }
-
-    Scaffold(
-        topBar = {
-            TopBar(
-                canNavigateBack = true,
-                navigateBack = {
-                    navController.navigate(AddSessionRoutes.AddExercise.name)
-                },
-                navigateToSettings = navigateToSettings
-            )
-        },
-        content = { padding ->
-            LazyColumn(
-                Modifier
-                    .fillMaxSize()
-                    .padding(padding),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                stickyHeader {
-                    BasicHeader(R.string.create_exercise)
-                }
-
-                item {
+        AlertDialog(
+            onDismissRequest = closeDialog,
+            title = {
+                Text(text = stringResource(R.string.add_exercise))
+            },
+            text = {
+                Column {
                     TextField(
                         value = name,
                         onValueChange = { name = it },
@@ -100,7 +72,8 @@ fun CreateExerciseBody(
                         },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 5.dp),
+                            .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 5.dp)
+                            .focusRequester(focusRequester),
                         singleLine = true,
                         shape = RoundedCornerShape(Constants.ROUNDED_CORNER),
                         colors = TextFieldDefaults.textFieldColors(
@@ -113,9 +86,13 @@ fun CreateExerciseBody(
                     )
 
                     Spacer(modifier = Modifier.height(10.dp))
-                }
 
-                item {
+                    LaunchedEffect(Unit) {
+                        coroutineContext.job.invokeOnCompletion {
+                            focusRequester.requestFocus()
+                        }
+                    }
+
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.padding(
@@ -168,7 +145,7 @@ fun CreateExerciseBody(
                                 textFieldSize.width.toDp()
                             })
                         ) {
-                            MuscleList.forEach() { label ->
+                            MuscleList.forEach { label ->
                                 DropdownMenuItem(
                                     onClick = {
                                         muscle = label
@@ -181,29 +158,33 @@ fun CreateExerciseBody(
                         }
                     }
                 }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        if (name != Constants.NO_VALUE && muscle != Constants.NO_VALUE) {
+                            val exercise = ExerciseModel(
+                                0, name, muscle, false, mutableListOf()
+                            )
+                            addExercise(exercise)
+                            closeDialog()
 
-                if (isPressed) {
-                    val exercise = ExerciseModel(
-                        0, name, muscle, false, mutableListOf()
-                    )
-                    addExercise(exercise)
-                }
-            }
-        },
-        floatingActionButton = {
-            if (name != Constants.NO_VALUE && muscle != Constants.NO_VALUE) {
-                FloatingActionButton(
-                    onClick = navigateBackToAddExercise,
-
-                    interactionSource = interactionSource
+                        } else {
+                            Toast.makeText(context, "Please complete everything", Toast.LENGTH_LONG)
+                                .show()
+                        }
+                    },
                 ) {
-                    Icon(
-                        Icons.Filled.Check,
-                        contentDescription = "Create Exercise"
-                    )
+                    Text(stringResource(R.string.add))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = closeDialog
+                ) {
+                    Text(stringResource(R.string.cancel))
                 }
             }
-        },
-        floatingActionButtonPosition = FabPosition.End
-    )
+        )
+    }
 }

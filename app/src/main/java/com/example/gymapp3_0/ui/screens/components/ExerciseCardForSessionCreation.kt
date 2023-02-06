@@ -21,9 +21,9 @@ import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 @SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExerciseCard(
+fun ExerciseCardForSessionCreation(
     exercise: ExerciseModel,
-    ExerciseViewModel: ExerciseViewModel = hiltViewModel(),
+    exerciseViewModel: ExerciseViewModel = hiltViewModel(),
     sessionViewModel: SessionViewModel = hiltViewModel(),
     deleteExercise: () -> Unit,
     temporaryList: MutableList<ExerciseModel>,
@@ -43,7 +43,7 @@ fun ExerciseCard(
             isSelected.value = !isSelected.value
             exo.isSelected = isSelected.value
             //exercise.isSelected = isSelected.value
-            ExerciseViewModel.updateExercise(exo)
+            exerciseViewModel.updateExercise(exo)
             if (!temporaryList.contains(exo) && exo.isSelected) {
                 temporaryList.add(exo)
             } else if (temporaryList.contains(exo) && !exo.isSelected) {
@@ -95,7 +95,7 @@ fun ExerciseCard(
                     contentDescription = "",
                 )
             }
-            
+
             if (deleteClicked) {
                 AlertDialog(
                     onDismissRequest = {
