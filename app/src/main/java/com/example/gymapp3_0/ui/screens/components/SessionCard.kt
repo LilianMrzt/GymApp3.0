@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gymapp3_0.core.Constants.Companion.ROUNDED_CORNER
 import com.example.gymapp3_0.domain.models.SessionModel
@@ -36,8 +37,10 @@ fun SessionCard(
         ) {
 
 
-            TextName(
-                sessionName = session.name,
+            Text(
+                text = session.name,
+                fontSize = 25.sp,
+                style = MaterialTheme.typography.titleLarge
             )
 
             DeleteSessionAlertDialog(

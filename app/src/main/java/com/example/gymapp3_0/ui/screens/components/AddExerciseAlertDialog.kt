@@ -2,6 +2,7 @@ package com.example.gymapp3_0.ui.screens.components
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -73,7 +74,6 @@ fun AddExerciseAlertDialog(
                         },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 5.dp)
                             .focusRequester(focusRequester),
                         singleLine = true,
                         shape = RoundedCornerShape(Constants.ROUNDED_CORNER),
@@ -96,13 +96,9 @@ fun AddExerciseAlertDialog(
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 10.dp,
-                            bottom = 5.dp
-                        )
-                    ) {
+                        verticalArrangement = Arrangement.Center,
+
+                        ) {
 
                         Text(
                             text = stringResource(R.string.exercise_muscle),
@@ -126,11 +122,13 @@ fun AddExerciseAlertDialog(
                             ) {
                                 if (!muscleSelected) {
                                     Text(
-                                        text = stringResource(R.string.exercise_muscle)
+                                        text = stringResource(R.string.select_muscle),
+                                        style = MaterialTheme.typography.bodyLarge
                                     )
                                 } else {
                                     Text(
-                                        text = muscle
+                                        text = muscle,
+                                        style = MaterialTheme.typography.bodyLarge
                                     )
                                 }
 
@@ -145,9 +143,11 @@ fun AddExerciseAlertDialog(
                         DropdownMenu(
                             expanded = expanded,
                             onDismissRequest = { expanded = false },
-                            Modifier.width(with(LocalDensity.current) {
-                                textFieldSize.width.toDp()
-                            }),
+                            modifier = Modifier
+                                .width(with(LocalDensity.current) {
+                                    textFieldSize.width.toDp()
+                                })
+                                .background(MaterialTheme.colorScheme.surfaceVariant),
                         ) {
                             MuscleList.forEach { label ->
                                 DropdownMenuItem(
@@ -157,7 +157,7 @@ fun AddExerciseAlertDialog(
                                         muscleSelected = true
                                     },
                                     text = { Text(text = label) },
-                                    modifier = Modifier.background(MaterialTheme.colorScheme.surfaceVariant)
+                                    modifier = Modifier
                                 )
                             }
                         }
@@ -175,7 +175,11 @@ fun AddExerciseAlertDialog(
                             closeDialog()
 
                         } else {
-                            Toast.makeText(context, "Please complete everything", Toast.LENGTH_LONG)
+                            Toast.makeText(
+                                context,
+                                R.string.complete_every_field,
+                                Toast.LENGTH_LONG
+                            )
                                 .show()
                         }
                     },

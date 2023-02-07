@@ -90,7 +90,7 @@ fun SetCard(
                     contentDescription = "",
                 )
             }
-            
+
             /*
             DeleteSetAlertDialog(
                 openDialogForModification = setsViewModel.openDialogForModification,
@@ -109,7 +109,7 @@ fun SetCard(
                         Text(text = stringResource(R.string.warning))
                     },
                     text = {
-                        Text(text = stringResource(R.string.delete_exercise_confirmation))
+                        Text(text = stringResource(R.string.delete_set_confirmation))
                     },
                     confirmButton = {
                         TextButton(

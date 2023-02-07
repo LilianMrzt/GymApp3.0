@@ -48,24 +48,24 @@ fun AddExerciseBody(
     val sessionExerciseList = session.exerciseList.map { it }.toMutableList()
 
     /*
-    exercises.forEach { exercise ->
-        if (sessionExerciseList.contains(exercise)) {
-            exercise.isSelected = true
-            exerciseViewModel.updateExercise(exercise)
-        } else {
-            exercise.isSelected = false
-            exerciseViewModel.updateExercise(exercise)
+        exercises.forEach { exercise ->
+            if (sessionExerciseList.contains(exercise)) {
+                exercise.isSelected = true
+                exerciseViewModel.updateExercise(exercise)
+            } else {
+                exercise.isSelected = false
+                exerciseViewModel.updateExercise(exercise)
+            }
         }
-    }
-
      */
+
+
 
     Scaffold(
         topBar = {
             TopBar(
                 canNavigateBack = true,
                 navigateBack = {
-                    //navController.navigate(AddSessionRoutes.CreateSession.name)
                     navController.navigateUp()
                 },
                 navigateToSettings = navigateToSettings
@@ -75,7 +75,6 @@ fun AddExerciseBody(
             ExerciseContent(
                 padding = padding,
                 exercises = exercises,
-                temporaryList = sessionExerciseList,
                 deleteExercise = { exercise ->
                     exerciseViewModel.deleteExercise(exercise)
                 }
@@ -93,7 +92,14 @@ fun AddExerciseBody(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    session.exerciseList = sessionExerciseList.map { it }
+
+                    sessionExerciseList.clear()
+                    for (exercise in exercises) {
+                        if (exercise.isSelected) {
+                            sessionExerciseList.add(exercise)
+                        }
+                    }
+                    session.exerciseList = sessionExerciseList.toList()
                     sessionViewModel.updateSession(session)
                     navController.navigateUp()
                 },

@@ -15,7 +15,6 @@ import com.example.gymapp3_0.domain.repository.Exercises
 fun ExerciseContent(
     padding: PaddingValues,
     exercises: Exercises,
-    temporaryList: MutableList<ExerciseModel>,
     deleteExercise: (exercise: ExerciseModel) -> Unit,
 ) {
     LazyColumn(
@@ -38,7 +37,6 @@ fun ExerciseContent(
                 deleteExercise = {
                     deleteExercise(exercise)
                 },
-                temporaryList = temporaryList
             )
         }
     }

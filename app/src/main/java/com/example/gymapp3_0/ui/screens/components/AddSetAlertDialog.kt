@@ -148,7 +148,11 @@ fun AddSetAlertDialog(
                             addSet(set)
                             closeDialog()
                         } else {
-                            Toast.makeText(context, "Please complete everything", Toast.LENGTH_LONG)
+                            Toast.makeText(
+                                context,
+                                R.string.complete_every_field,
+                                Toast.LENGTH_LONG
+                            )
                                 .show()
                         }
                     },

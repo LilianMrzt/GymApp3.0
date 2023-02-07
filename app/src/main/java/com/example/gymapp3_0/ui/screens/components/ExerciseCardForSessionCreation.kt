@@ -1,11 +1,13 @@
 package com.example.gymapp3_0.ui.screens.components
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,10 +28,11 @@ fun ExerciseCardForSessionCreation(
     exerciseViewModel: ExerciseViewModel = hiltViewModel(),
     sessionViewModel: SessionViewModel = hiltViewModel(),
     deleteExercise: () -> Unit,
-    temporaryList: MutableList<ExerciseModel>,
 ) {
     val isSelected = remember { mutableStateOf(exercise.isSelected) }
     var deleteClicked by remember { mutableStateOf(false) }
+    var expanded by remember { mutableStateOf(false) }
+    val exo = exercise.copy()
 
     ElevatedCard(
         shape = RoundedCornerShape(10.dp),
@@ -37,16 +40,11 @@ fun ExerciseCardForSessionCreation(
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp, top = 5.dp, bottom = 5.dp),
         onClick = {
-            val exo = exercise.copy() // This way works
+            // This way works
             isSelected.value = !isSelected.value
             exo.isSelected = isSelected.value
             //exercise.isSelected = isSelected.value
             exerciseViewModel.updateExercise(exo)
-            if (!temporaryList.contains(exo) && exo.isSelected) {
-                temporaryList.add(exo)
-            } else if (temporaryList.contains(exo) && !exo.isSelected) {
-                temporaryList.remove(exo)
-            }
         }
     ) {
         Row(
@@ -81,7 +79,8 @@ fun ExerciseCardForSessionCreation(
 
             IconButton(
                 onClick = {
-                    deleteClicked = true
+                    //deleteClicked = true
+                    expanded = true
                 },
                 modifier = Modifier
                     .size(30.dp)
@@ -91,7 +90,34 @@ fun ExerciseCardForSessionCreation(
                     imageVector = Icons.Default.MoreVert,
                     contentDescription = "",
                 )
+
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.surfaceVariant),
+
+                    ) {
+
+                    DropdownMenuItem(
+                        onClick = {
+                            deleteClicked = true
+                            expanded = false
+                        },
+                        text = { Text(text = "Delete") },
+                        trailingIcon = {
+                            Icon(
+                                Icons.Outlined.Delete,
+                                contentDescription = null
+                            )
+                        }
+                    )
+
+                }
+
             }
+
+
 
             if (deleteClicked) {
                 AlertDialog(

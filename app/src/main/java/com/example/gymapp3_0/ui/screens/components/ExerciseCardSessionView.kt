@@ -25,12 +25,7 @@ fun ExerciseCardForSessionView(
         onClick = { navigateToViewExerciseContent(exercise.id) }
     ) {
         Row(
-            modifier = Modifier.padding(
-                start = 16.dp,
-                end = 16.dp,
-                top = 10.dp,
-                bottom = 10.dp
-            ),
+            modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -50,7 +49,7 @@ fun AddExerciseHeader(
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
-                Spacer(modifier = Modifier.width(48.dp))
+                Spacer(modifier = Modifier.width(24.dp))
 
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
@@ -72,21 +71,6 @@ fun AddExerciseHeader(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "",
-                        tint = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.padding(0.dp)
-                    )
-                }
-
-                IconButton(
-                    onClick = {
-                    },
-                    modifier = Modifier
-                        .size(30.dp)
-                        .padding(0.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.MoreVert,
                         contentDescription = "",
                         tint = MaterialTheme.colorScheme.onSurface,
                         modifier = Modifier.padding(0.dp)
