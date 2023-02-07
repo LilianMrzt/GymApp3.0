@@ -1,4 +1,5 @@
 package com.example.gymapp3_0.ui.theme
+
 import androidx.compose.ui.graphics.Color
 
 val md_theme_light_primary = Color(0xFFA7373A)
@@ -63,5 +64,10 @@ val md_theme_dark_surfaceTint = Color(0xFFFFB3B0)
 val md_theme_dark_outlineVariant = Color(0xFF524342)
 val md_theme_dark_scrim = Color(0xFF000000)
 
-
-val seed = Color(0xFF60000E)
+val ListRed = Color(0xFFFF453A)
+val ListOrange = Color(0xFFFF9F0A)
+val ListYellow = Color(0xFFFFD60A)
+val ListGreen = Color(0xFF30D15B)
+val ListBlue = Color(0xFF0A84FF)
+val ListPurple = Color(0xFF5E5CE6)
+val ListBrown = Color(0xFFC9A675)

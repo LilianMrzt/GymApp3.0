@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gymapp3_0.domain.models.ExerciseModel
+import com.example.gymapp3_0.domain.models.SessionColor
 import com.example.gymapp3_0.domain.models.SessionModel
 import com.example.gymapp3_0.domain.repository.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +19,14 @@ class SessionViewModel @Inject constructor(
     private val repo: SessionRepository
 ) : ViewModel() {
 
-    var session by mutableStateOf(SessionModel(0, "", arrayListOf<ExerciseModel>()))
+    var session by mutableStateOf(
+        SessionModel(
+            0,
+            "",
+            arrayListOf<ExerciseModel>(),
+            sessionColor = SessionColor.BLUE
+        )
+    )
     var openDialog by mutableStateOf(false)
     var sessions = repo.getSessionsFromRoom()
     val temporaryList: MutableList<ExerciseModel> = mutableListOf()

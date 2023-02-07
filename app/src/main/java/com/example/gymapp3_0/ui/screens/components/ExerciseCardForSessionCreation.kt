@@ -34,6 +34,11 @@ fun ExerciseCardForSessionCreation(
     var expanded by remember { mutableStateOf(false) }
     val exo = exercise.copy()
 
+
+
+
+
+
     ElevatedCard(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier

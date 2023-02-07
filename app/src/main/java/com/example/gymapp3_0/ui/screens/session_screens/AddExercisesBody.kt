@@ -52,13 +52,17 @@ fun AddExerciseBody(
             TopBar(
                 canNavigateBack = true,
                 navigateBack = {
-                    navController.navigateUp()
+                    sessionExerciseList.clear()
                     for (exercise in exercises) {
                         if (exercise.isSelected) {
+                            sessionExerciseList.add(exercise)
                             exercise.isSelected = false
                             exerciseViewModel.updateExercise(exercise)
                         }
                     }
+                    session.exerciseList = sessionExerciseList.toList()
+                    sessionViewModel.updateSession(session)
+                    navController.navigateUp()
                 },
                 navigateToSettings = navigateToSettings
             )
