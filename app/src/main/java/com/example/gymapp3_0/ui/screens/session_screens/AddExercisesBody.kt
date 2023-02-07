@@ -47,26 +47,18 @@ fun AddExerciseBody(
 
     val sessionExerciseList = session.exerciseList.map { it }.toMutableList()
 
-    /*
-        exercises.forEach { exercise ->
-            if (sessionExerciseList.contains(exercise)) {
-                exercise.isSelected = true
-                exerciseViewModel.updateExercise(exercise)
-            } else {
-                exercise.isSelected = false
-                exerciseViewModel.updateExercise(exercise)
-            }
-        }
-     */
-
-
-
     Scaffold(
         topBar = {
             TopBar(
                 canNavigateBack = true,
                 navigateBack = {
                     navController.navigateUp()
+                    for (exercise in exercises) {
+                        if (exercise.isSelected) {
+                            exercise.isSelected = false
+                            exerciseViewModel.updateExercise(exercise)
+                        }
+                    }
                 },
                 navigateToSettings = navigateToSettings
             )
@@ -77,7 +69,8 @@ fun AddExerciseBody(
                 exercises = exercises,
                 deleteExercise = { exercise ->
                     exerciseViewModel.deleteExercise(exercise)
-                }
+                },
+                session = session
             )
 
             AddExerciseAlertDialog(
@@ -92,15 +85,17 @@ fun AddExerciseBody(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-
                     sessionExerciseList.clear()
                     for (exercise in exercises) {
                         if (exercise.isSelected) {
                             sessionExerciseList.add(exercise)
+                            exercise.isSelected = false
+                            exerciseViewModel.updateExercise(exercise)
                         }
                     }
                     session.exerciseList = sessionExerciseList.toList()
                     sessionViewModel.updateSession(session)
+
                     navController.navigateUp()
                 },
             ) {

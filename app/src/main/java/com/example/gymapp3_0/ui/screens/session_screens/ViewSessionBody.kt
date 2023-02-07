@@ -11,6 +11,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,12 +22,14 @@ import com.example.gymapp3_0.ui.navigation.AddSessionRoutes
 import com.example.gymapp3_0.ui.screens.components.ExerciseCardForSessionView
 import com.example.gymapp3_0.ui.screens.components.TopBar
 import com.example.gymapp3_0.ui.screens.components.ViewSessionHeader
+import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 import com.example.gymapp3_0.ui.viewModels.SessionViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ViewSessionBody(
     sessionViewModel: SessionViewModel = hiltViewModel(),
+    exerciseViewModel: ExerciseViewModel = hiltViewModel(),
     sessionId: Int,
     @StringRes screenTitle: Int,
     navController: NavController,
@@ -36,6 +40,14 @@ fun ViewSessionBody(
     LaunchedEffect(Unit) {
         sessionViewModel.getSession(sessionId)
     }
+
+    val exercises by exerciseViewModel.exercises.collectAsState(
+        initial = emptyList()
+    )
+
+    val session = sessionViewModel.session
+    val sessionExerciseList = session.exerciseList.map { it }.toList()
+
     Scaffold(
         topBar = {
             TopBar(
@@ -58,7 +70,9 @@ fun ViewSessionBody(
                 stickyHeader {
                     ViewSessionHeader(
                         title = R.string.select_exercise,
-                        navigateToAddExercise = navigateToAddExercise
+                        navigateToAddExercise = navigateToAddExercise,
+                        exercises = exercises,
+                        sessionList = sessionExerciseList
                     )
                 }
 

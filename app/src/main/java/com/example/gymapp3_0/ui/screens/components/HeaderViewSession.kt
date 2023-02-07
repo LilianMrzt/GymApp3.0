@@ -25,11 +25,18 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.gymapp3_0.domain.models.ExerciseModel
+import com.example.gymapp3_0.domain.repository.Exercises
+import com.example.gymapp3_0.ui.viewModels.ExerciseViewModel
 
 @Composable
 fun ViewSessionHeader(
     @StringRes title: Int,
-    navigateToAddExercise: () -> Unit
+    navigateToAddExercise: () -> Unit,
+    exercises: Exercises,
+    sessionList: List<ExerciseModel>,
+    exerciseViewModel: ExerciseViewModel = hiltViewModel()
 ) {
     Card(
         modifier = Modifier
@@ -63,7 +70,15 @@ fun ViewSessionHeader(
                 Spacer(modifier = Modifier.weight(1f))
 
                 IconButton(
-                    onClick = navigateToAddExercise,
+                    onClick = {
+                        for (exercise in exercises) {
+                            if (sessionList.contains(exercise)) {
+                                exercise.isSelected = true
+                                exerciseViewModel.updateExercise(exercise)
+                            }
+                        }
+                        navigateToAddExercise()
+                    },
                     modifier = Modifier
                         .size(30.dp)
                         .padding(0.dp)
