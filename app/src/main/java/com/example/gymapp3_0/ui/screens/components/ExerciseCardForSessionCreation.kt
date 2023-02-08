@@ -43,7 +43,7 @@ fun ExerciseCardForSessionCreation(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, top = 10.dp, bottom = 5.dp),
+            .padding(start = 16.dp, end = 16.dp, top = 5.dp, bottom = 10.dp),
         onClick = {
             // This way works
             isSelected.value = !isSelected.value
