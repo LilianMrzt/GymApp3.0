@@ -34,7 +34,8 @@ enum class SessionColor {
     YELLOW,
     ORANGE,
     PURPLE,
-    BROWN
+    BROWN,
+    BLACK
 }
 
 fun SessionColor.toColor() = when (this) {
@@ -45,6 +46,7 @@ fun SessionColor.toColor() = when (this) {
     SessionColor.ORANGE -> ListOrange
     SessionColor.PURPLE -> ListPurple
     SessionColor.BROWN -> ListBrown
+    SessionColor.BLACK -> ListBlack
 }
 
 fun Color.toSessionColor() = when (this) {
@@ -55,5 +57,6 @@ fun Color.toSessionColor() = when (this) {
     ListOrange -> SessionColor.ORANGE
     ListPurple -> SessionColor.PURPLE
     ListBrown -> SessionColor.BROWN
+    ListBlack -> SessionColor.BLACK
     else -> SessionColor.BLUE
 }

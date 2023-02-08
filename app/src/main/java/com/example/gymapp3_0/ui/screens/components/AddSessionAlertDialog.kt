@@ -49,6 +49,10 @@ fun AddSessionAlertDialog(
         var isGreenSelected = remember { mutableStateOf(false) }
         var isRedSelected = remember { mutableStateOf(false) }
         var isOrangeSelected = remember { mutableStateOf(false) }
+        var isBlackSelected = remember { mutableStateOf(false) }
+        var isPurpleSelected = remember { mutableStateOf(false) }
+        var isYellowSelected = remember { mutableStateOf(false) }
+        var isBrownSelected = remember { mutableStateOf(false) }
 
         AlertDialog(
             onDismissRequest = closeDialog,
@@ -97,6 +101,10 @@ fun AddSessionAlertDialog(
                                 isGreenSelected.value = false
                                 isOrangeSelected.value = false
                                 isRedSelected.value = false
+                                isBlackSelected.value = false
+                                isBrownSelected.value = false
+                                isYellowSelected.value = false
+                                isPurpleSelected.value = false
                             },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = SessionColor.BLUE.toColor()
@@ -121,6 +129,10 @@ fun AddSessionAlertDialog(
                                 isGreenSelected.value = true
                                 isOrangeSelected.value = false
                                 isRedSelected.value = false
+                                isBlackSelected.value = false
+                                isBrownSelected.value = false
+                                isYellowSelected.value = false
+                                isPurpleSelected.value = false
                             },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = SessionColor.GREEN.toColor()
@@ -145,6 +157,10 @@ fun AddSessionAlertDialog(
                                 isGreenSelected.value = false
                                 isOrangeSelected.value = false
                                 isRedSelected.value = true
+                                isBlackSelected.value = false
+                                isBrownSelected.value = false
+                                isYellowSelected.value = false
+                                isPurpleSelected.value = false
                             },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = SessionColor.RED.toColor()
@@ -169,6 +185,10 @@ fun AddSessionAlertDialog(
                                 isGreenSelected.value = false
                                 isOrangeSelected.value = true
                                 isRedSelected.value = false
+                                isBlackSelected.value = false
+                                isBrownSelected.value = false
+                                isYellowSelected.value = false
+                                isPurpleSelected.value = false
                             },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = SessionColor.ORANGE.toColor()
@@ -178,6 +198,126 @@ fun AddSessionAlertDialog(
                             contentPadding = PaddingValues(0.dp),
                         ) {
                             if (isOrangeSelected.value) {
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = "",
+                                    tint = MaterialTheme.colorScheme.onSurface,
+                                )
+                            }
+                        }
+                    }
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        Button(
+                            onClick = {
+                                color = SessionColor.BLACK
+                                isBlueSelected.value = false
+                                isGreenSelected.value = false
+                                isOrangeSelected.value = false
+                                isRedSelected.value = false
+                                isBlackSelected.value = true
+                                isBrownSelected.value = false
+                                isYellowSelected.value = false
+                                isPurpleSelected.value = false
+
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = SessionColor.BLACK.toColor()
+                            ),
+                            shape = CircleShape,
+                            modifier = Modifier.size(40.dp),
+                            contentPadding = PaddingValues(0.dp),
+                        ) {
+                            if (isBlackSelected.value) {
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = "",
+                                    tint = MaterialTheme.colorScheme.onSurface,
+                                )
+                            }
+                        }
+
+                        Button(
+                            onClick = {
+                                color = SessionColor.PURPLE
+                                isBlueSelected.value = false
+                                isGreenSelected.value = false
+                                isOrangeSelected.value = false
+                                isRedSelected.value = false
+                                isBlackSelected.value = false
+                                isBrownSelected.value = false
+                                isYellowSelected.value = false
+                                isPurpleSelected.value = true
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = SessionColor.PURPLE.toColor()
+                            ),
+                            shape = CircleShape,
+                            modifier = Modifier.size(40.dp),
+                            contentPadding = PaddingValues(0.dp),
+                        ) {
+                            if (isPurpleSelected.value) {
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = "",
+                                    tint = MaterialTheme.colorScheme.onSurface,
+                                )
+                            }
+                        }
+
+                        Button(
+                            onClick = {
+                                color = SessionColor.BROWN
+                                isBlueSelected.value = false
+                                isGreenSelected.value = false
+                                isOrangeSelected.value = false
+                                isRedSelected.value = false
+                                isBlackSelected.value = false
+                                isBrownSelected.value = true
+                                isYellowSelected.value = false
+                                isPurpleSelected.value = false
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = SessionColor.BROWN.toColor()
+                            ),
+                            shape = CircleShape,
+                            modifier = Modifier.size(40.dp),
+                            contentPadding = PaddingValues(0.dp),
+                        ) {
+                            if (isBrownSelected.value) {
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = "",
+                                    tint = MaterialTheme.colorScheme.onSurface,
+                                )
+                            }
+                        }
+
+                        Button(
+                            onClick = {
+                                color = SessionColor.YELLOW
+                                isBlueSelected.value = false
+                                isGreenSelected.value = false
+                                isOrangeSelected.value = false
+                                isRedSelected.value = false
+                                isBlackSelected.value = false
+                                isBrownSelected.value = false
+                                isYellowSelected.value = true
+                                isPurpleSelected.value = false
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = SessionColor.YELLOW.toColor()
+                            ),
+                            shape = CircleShape,
+                            modifier = Modifier.size(40.dp),
+                            contentPadding = PaddingValues(0.dp),
+                        ) {
+                            if (isYellowSelected.value) {
                                 Icon(
                                     imageVector = Icons.Default.Check,
                                     contentDescription = "",

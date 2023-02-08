@@ -23,6 +23,9 @@ fun SessionCard(
     navigateToViewSession: (sessionID: Int) -> Unit,
     sessionViewModel: SessionViewModel = hiltViewModel(),
 ) {
+
+
+
     ElevatedCard(
         shape = RoundedCornerShape(ROUNDED_CORNER),
         modifier = Modifier
